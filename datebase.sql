@@ -1,10 +1,10 @@
 CREATE TABLE category (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE product (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     price BIGINT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE product (
 );
 
 CREATE TABLE customer (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE customer (
 );
 
 CREATE TABLE cart (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     customer_id BIGINT NOT NULL REFERENCES customer(id)
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE cart_product (
 );
 
 CREATE TABLE order (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     customer_id BIGINT NOT NULL REFERENCES customer(id),
     date TIMESTAMP NOT NULL,
     status VARCHAR(255) NOT NULL
@@ -45,12 +45,12 @@ CREATE TABLE order_product (
 );
 
 CREATE TABLE seller (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE store (
-    id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
     seller_id BIGINT NOT NULL REFERENCES seller(id)
 );
