@@ -62,8 +62,8 @@ CREATE TABLE store_product (
 );
 
 CREATE TABLE delivery (
-    prodict_id BIGINT NOT NULL REFERENCES product(id),
     store_id BIGINT NOT NULL REFERENCES store(id),
-    date TIMESTAMP NOT NULL,
-    amount BIGINT NOT NULL
+    product_id BIGINT NOT NULL REFERENCES product(id),
+    amount BIGINT NOT NULL,
+    date TIMESTAMP NOT NULL
 );
