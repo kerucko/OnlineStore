@@ -117,7 +117,7 @@ VALUES (1, 50, 3),
 (9, 55, 10),
 (10, 21, 1);
 
-INSERT INTO order(customer_id, date, status)
+INSERT INTO orders(customer_id, date, status)
 VALUES (1, 2023-10-20, 'В сборке'),
 (2, 2023-10-19, 'В сборке'),
 (3, 2023-10-18, 'В сборке'),
