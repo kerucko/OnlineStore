@@ -1,11 +1,11 @@
 CREATE TABLE category (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE product (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     price BIGINT NOT NULL,
     url_photo VARCHAR(255) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE product (
 
 CREATE TABLE customer (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    customer_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE order_product (
 
 CREATE TABLE seller (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE store (
