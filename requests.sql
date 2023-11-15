@@ -47,7 +47,16 @@ GROUP BY p.title
 ORDER BY total DESC
 LIMIT 10;
 
--- Все товары, которые заказывали оптом (ANY)
+-- Вывести всех пользователей, у которых хотя бы один заказ доставлен.
+SELECT customer_name, email, phone
+FROM customer 
+join orders on customer.id = orders.customer_id
+WHERE orders.customer_id = ANY(
+	SELECT customer_id 
+	FROM orders 
+	WHERE status = 'Доставлен'
+);
+
 
 -- изменить все статусы заказов 'Получен' на 'Доставлен'
 UPDATE orders 
