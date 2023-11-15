@@ -57,8 +57,19 @@ WHERE orders.customer_id = ANY(
 	WHERE status = 'Доставлен'
 );
 
-
 -- изменить все статусы заказов 'Получен' на 'Доставлен'
 UPDATE orders 
 SET status = 'Доставлен'
 WHERE status = 'Получен';
+
+-- все товары из категорий 'Женская одежда и обувь' и 'Мужская одежда и обувь'
+SELECT p.title, p.price, p.url_photo, c.title AS category_title, p.description
+FROM product p
+JOIN category c ON p.category_id = c.id
+WHERE c.title = 'Женская одежда и обувь'
+UNION
+SELECT p.title, p.price, p.url_photo, c.title AS category_title, p.description
+FROM product p
+JOIN category c ON p.category_id = c.id
+WHERE c.title = 'Мужская одежда и обувь';
+
