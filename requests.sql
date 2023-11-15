@@ -1,11 +1,3 @@
--- Все пользователи и их заказанные продукты
-SELECT customer.customer_name, product.title
-FROM customer
-JOIN cart ON customer.id = cart.customer_id
-JOIN cart_product ON cart.id = cart_product.cart_id
-JOIN product ON cart_product.product_id = product.id
-GROUP BY customer.customer_name, product.title;
-
 -- Количество товаров, пришедших на склад в определенный промежуток времени
 SELECT store.id, SUM(delivery.amount)
 FROM delivery
@@ -54,11 +46,5 @@ JOIN order_product op ON p.id = op.product_id
 GROUP BY p.title
 ORDER BY total DESC
 LIMIT 10;
-
--- Сколько человек добавили в корзину каждый товар
-SELECT p.title, COUNT(cp.cart_id) AS in_cart
-FROM product p
-JOIN cart_product cp ON p.id = cp.product_id
-GROUP BY p.title;
 
 -- Все товары, которые заказывали оптом (ANY)
