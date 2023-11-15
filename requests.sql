@@ -13,7 +13,7 @@ JOIN store ON delivery.store_id = store.id AND store.id = 2
 WHERE delivery.date BETWEEN '2023-08-20' AND '2023-08-25'
 GROUP BY store.id;
 
--- Имена пользователей, которые купили хотя бы три товара из категории 'Книги'
+-- Имена пользователей, которые купили хотя бы три товара из категории 'Техника'
 SELECT c.customer_name, c.address, p.title
 FROM customer c
 JOIN orders o ON o.customer_id = c.id
@@ -30,7 +30,7 @@ FROM customer c
 JOIN orders o ON c.id = o.customer_id
 JOIN order_product op on o.id = op.order_id
 JOIN product p on op.product_id = p.id
-GROUP op.order_id, c.customer_name, c.address
+GROUP BY op.order_id, c.customer_name, c.address
 HAVING SUM(p.price*op.amount) = (
   SELECT SUM(p.price * op.amount) AS Стоимость
   FROM order_product op
