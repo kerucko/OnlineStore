@@ -57,12 +57,12 @@ WHERE orders.customer_id = ANY(
 	WHERE status = 'Доставлен'
 );
 
--- изменить все статусы заказов 'Получен' на 'Доставлен'
+-- Изменить все статусы заказов 'Получен' на 'Доставлен'
 UPDATE orders 
 SET status = 'Доставлен'
 WHERE status = 'Получен';
 
--- все товары из категорий 'Женская одежда и обувь' и 'Мужская одежда и обувь'
+-- Все товары из категорий 'Женская одежда и обувь' и 'Мужская одежда и обувь'
 SELECT p.title, p.price, p.url_photo, c.title AS category_title, p.description
 FROM product p
 JOIN category c ON p.category_id = c.id
@@ -73,8 +73,43 @@ FROM product p
 JOIN category c ON p.category_id = c.id
 WHERE c.title = 'Мужская одежда и обувь';
 
+-- Все пользователи, купившие товары и в категории "Техника", и в категории "Книги"
+SELECT customer_name, email, phone
+FROM customer
+JOIN orders ON customer.id = orders.customer_id
+JOIN order_product ON orders.id = order_product.order_id
+JOIN product ON order_product.product_id = product.id
+JOIN category ON product.category_id = category.id
+WHERE category.title = 'Техника'
+INTERSECT
+SELECT customer_name, email, phone
+FROM customer
+JOIN orders ON customer.id = orders.customer_id
+JOIN order_product ON orders.id = order_product.order_id
+JOIN product ON order_product.product_id = product.id
+JOIN category ON product.category_id = category.id
+WHERE category.title = 'Книги';
+
+-- Все продавцы, которые продают товары из категории "Спорт", но не продают товары из категории "Техника"
+SELECT seller.title
+FROM seller
+JOIN store ON seller.id = store.seller_id
+JOIN store_product ON store.id = store_product.store_id
+JOIN product ON store_product.product_id = product.id
+JOIN category ON product.category_id = category.id
+WHERE category.title = 'Спорт'
+EXCEPT
+SELECT seller.title
+FROM seller
+JOIN store ON seller.id = store.seller_id
+JOIN store_product ON store.id = store_product.store_id
+JOIN product ON store_product.product_id = product.id
+JOIN category ON product.category_id = category.id
+WHERE category.title = 'Техника';
+
 -- Вывести всех пользователей, у которых хотя бы один заказ был оформлен хотя бы в одной из категорий Красота, Спорт, Здоровье и количество товаров было равно 3.
-SELECT customer_name, email, phone, address FROM customer 
+SELECT customer_name, email, phone, address 
+FROM customer 
 WHERE EXISTS (
 	SELECT * 
 	FROM orders
@@ -84,3 +119,38 @@ WHERE EXISTS (
 	WHERE category.title IN ('Красота', 'Спорт', 'Здоровье') AND orders.customer_id = customer.id AND order_product.amount = 3
 )
 ORDER BY customer_name;
+
+-- Товары и комментарий, в котором будет указана цена выше или ниже средней цены, а также максимальная и минимальная цена
+SELECT p.title, p.price, 
+CASE
+  WHEN p.price = (SELECT MAX(price) FROM product) THEN 'Самая большая цена'
+  WHEN p.price = (SELECT MIN(price) FROM product) THEN 'Самая маленькая цена'
+  WHEN p.price > (SELECT AVG(price) FROM product) THEN 'Цена выше средней'
+  WHEN p.price < (SELECT AVG(price) FROM product) THEN 'Цена ниже средней'
+  ELSE 'Цена равна средней'
+END AS price_comment
+FROM product p
+ORDER BY p.price;
+
+-- Вывести всех пользователей, у которых хотя бы один заказ доставлен.
+SELECT customer_name, email, phone
+FROM customer 
+join orders on customer.id = orders.customer_id
+WHERE orders.customer_id = SOME(
+	SELECT customer_id 
+	FROM orders 
+	WHERE status = 'Доставлен'
+);
+
+-- Товары, цена которых выше средней цены всех категорий, не включая товары категории "Техника"
+SELECT p.title, p.price
+FROM product p
+JOIN category c ON p.category_id = c.id
+WHERE c.title <> 'Техника' AND p.price > ALL (
+  SELECT AVG(p2.price)
+  FROM category c2
+  JOIN product p2 ON c2.id = p2.category_id
+  WHERE c2.title <> 'Техника'
+  GROUP BY c2.title
+)
+ORDER BY p.price;
