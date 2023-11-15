@@ -14,15 +14,15 @@ WHERE delivery.date BETWEEN '2023-08-20' AND '2023-08-25'
 GROUP BY store.id;
 
 -- Имена пользователей, которые купили хотя бы три товара из категории 'Техника'
-SELECT c.customer_name, c.address, p.title
+SELECT op.order_id, c.customer_name
 FROM customer c
 JOIN orders o ON o.customer_id = c.id
 JOIN order_product op ON op.order_id = o.id
 JOIN product p ON op.product_id = p.id
 JOIN category ON p.category_id = category.id
 WHERE category.title = 'Техника'
-GROUP BY c.customer_name, c.address, p.title, op.amount
-HAVING SUM(op.amount) > 3;
+GROUP BY op.order_id, c.customer_name
+HAVING SUM(op.amount) > 1;
 
 -- Имя пользователя, который совершил заказ на максимальную сумму (подзапрос)
 SELECT c.customer_name, c.address, SUM(p.price*op.amount) AS price
