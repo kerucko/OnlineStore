@@ -73,3 +73,14 @@ FROM product p
 JOIN category c ON p.category_id = c.id
 WHERE c.title = 'Мужская одежда и обувь';
 
+-- Вывести всех пользователей, у которых хотя бы один заказ был оформлен хотя бы в одной из категорий Красота, Спорт, Здоровье и количество товаров было равно 3.
+SELECT customer_name, email, phone, address FROM customer 
+WHERE EXISTS (
+	SELECT * 
+	FROM orders
+	JOIN order_product ON order_product.order_id = orders.id
+	JOIN product ON order_product.product_id = product.id
+	JOIN category ON product.category_id = category.id
+	WHERE category.title IN ('Красота', 'Спорт', 'Здоровье') AND orders.customer_id = customer.id AND order_product.amount = 3
+)
+ORDER BY customer_name;
