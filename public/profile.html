@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="images/иконка.svg" />
+    <title>OnlineStore</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div class="header__container">
+          <div class="header__logo">
+            <a href="index.html">
+              <img
+                class="header__logo-img"
+                src="images/OnlineStore.svg"
+                alt="Logo"
+              />
+              <!-- <div class="logo__txt">OnlineStore</div> -->
+            </a>
+          </div>
+          <div class="header__search-box">
+            <input
+              class="header__search-txt"
+              type="text"
+              name=""
+              placeholder="Поиск"
+            />
+            <button class="header__search-btn" type="submit">
+              <img
+                class="header__search-img"
+                src="images/лупа.svg"
+                alt="loop"
+              />
+            </button>
+          </div>
+          <ul class="header__nav">
+            <li class="header__nav-box">
+              <a href="profile.html">
+                <img
+                  class="header__nav-img--profile"
+                  src="images/профиль.svg"
+                  alt="profile"
+                />
+                <div class="header__nav-txt">Профиль</div></a
+              >
+            </li>
+            <li class="header__nav-box">
+              <a href="#">
+                <img
+                  class="header__nav-img--busket"
+                  src="images/корзина.svg"
+                  alt="busket"
+                />
+                <div class="header__nav-txt">Корзина</div></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="body__container">
+        <div class="profile">
+          <div class="profile__inner">
+            <div class="profile__inner-main--txt">Мой профиль</div>
+            <div class="profile__inner-input">
+              <img
+                class="profile__inner-input--photo"
+                src="images/карточка.svg"
+                alt=""
+              />
+
+              <div class="profile__inner-input--forms">
+                <form class="profile__form">
+                  <label for="name">Фамилия и имя</label>
+                  <div class="profile__inner-input--knopka">
+                    <input
+                      class="profile__inner-input--name"
+                      type="text"
+                      name=""
+                      placeholder="Фамилия и имя"
+                      id="name"
+                    />
+                    <input
+                      class="profile__inner-input--btn"
+                      name=""
+                      type="submit"
+                      value="Сохранить"
+                    />
+                  </div>
+                </form>
+
+                <form class="profile__form">
+                  <label for="tel">Телефон</label>
+                  <div class="profile__inner-input--knopka">
+                    <input
+                      class="profile__inner-input--name"
+                      type="tel"
+                      name=""
+                      id="tel"
+                      placeholder="Телефон"
+                    />
+                    <input
+                      class="profile__inner-input--btn"
+                      name=""
+                      type="submit"
+                      value="Сохранить"
+                    />
+                  </div>
+                </form>
+
+                <form class="profile__form">
+                  <label for="email">Email</label>
+                  <div class="profile__inner-input--knopka">
+                    <input
+                      class="profile__inner-input--name"
+                      type="email"
+                      name=""
+                      id="email"
+                      placeholder="Email"
+                    />
+                    <input
+                      class="profile__inner-input--btn"
+                      name=""
+                      type="submit"
+                      value="Сохранить"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <form class="profile__form">
+            <label for="adress">Адрес</label>
+            <div class="profile__inner-input--knopka">
+              <input
+                class="profile__inner-input--adress"
+                type="text"
+                name=""
+                id="adress"
+                placeholder="Адрес"
+              />
+              <input
+                class="profile__inner-input--btn"
+                name=""
+                type="submit"
+                value="Сохранить"
+              />
+            </div>
+          </form>
+
+          <a class="profile__inner-orders-btn" href="#">
+            <div class="btn__order">Заказы</div></a
+          >
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer__container">
+          <div class="footer__section-txt">
+            <ul>
+              <li class="footer__bold-txt">О магазине</li>
+              <a href="#"><li>Акции и скидки</li></a>
+              <a href="#"><li>Юридическим лицам</li></a>
+              <a href="#"><li>Как заказать</li></a>
+              <a href="#"><li>Обмен и возврат</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Клиентам</li>
+              <a href="#"><li>Личный кабинет</li></a>
+              <a href="#"><li>Мои заказы</li></a>
+              <a href="#"><li>Вопросы и ответы</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Информация</li>
+              <a href="#"><li>Политика конфиденциальности и оферта</li></a>
+              <a href="#"><li>Пользовательское соглашение</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Мы в соцсетях</li>
+              <a href=""><li>ВКонтакте</li></a>
+              <a href=""><li>YouTube</li></a>
+              <a href=""><li>Телеграм</li></a>
+            </ul>
+          </div>
+          <img class="footer__line-decor" src="images/Line.png" alt="" />
+          <div class="footer__logo-cards">
+            <div class="footer__brand-logo">OnlineStore</div>
+            <img
+              class="footer__pay-cards"
+              src="images/платежные системы.png"
+              alt="Карты"
+            />
+          </div>
+          <div class="footer__c">
+            © OnlineStore - маркетплейс товаров различных категорий. Все права
+            защищены.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
