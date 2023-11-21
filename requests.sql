@@ -1,4 +1,4 @@
--- Количество товаров, пришедших на склад в определенный промежуток времени
+-- Количество товаров, пришедших на склад в определенный промежуток времени !store_id
 SELECT store.id, SUM(delivery.amount)
 FROM delivery
 JOIN store ON delivery.store_id = store.id AND store.id = 2
@@ -14,7 +14,7 @@ JOIN product p ON op.product_id = p.id
 JOIN category ON p.category_id = category.id
 WHERE category.title = 'Техника'
 GROUP BY op.order_id, c.customer_name
-HAVING SUM(op.amount) > 1;
+HAVING SUM(op.amount) > 3;
 
 -- Имя пользователя, который совершил заказ на максимальную сумму (подзапрос)
 SELECT c.customer_name, c.address, SUM(p.price*op.amount) AS price
@@ -32,7 +32,7 @@ HAVING SUM(p.price*op.amount) = (
   LIMIT 1
 );
 
--- Вывести все поставки на все склады определенного продавца
+-- Вывести все поставки на все склады определенного продавца !seller_id
 SELECT d.product_id, d.store_id, d.date, d.amount
 FROM delivery d
 JOIN store s ON d.store_id = s.id
