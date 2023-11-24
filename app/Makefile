@@ -1,16 +1,16 @@
 .PHONY: build run clean
 
 build:
-	go build cmd/store/main.go
+	go build -o store cmd/store/main.go
 
 run:
 	go run cmd/store/main.go
+
+depend:
+	go mod download && go mod verify
 
 lint:
 	golangci-lint run
 
 clean:
-	del main.exe # винда сосет
-
-depend:
-	go mod download && go mod verify
+	rm store
