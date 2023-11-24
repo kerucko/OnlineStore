@@ -11,3 +11,6 @@ lint:
 
 clean:
 	del main.exe # винда сосет
+
+depend:
+	go mod download && go mod verify
