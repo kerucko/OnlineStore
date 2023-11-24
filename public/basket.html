@@ -51,7 +51,7 @@
               >
             </li>
             <li class="header__nav-box">
-              <a href="basket.html">
+              <a href="#">
                 <img
                   class="header__nav-img--basket"
                   src="images/корзина.svg"
@@ -63,102 +63,64 @@
           </ul>
         </div>
       </div>
-
       <div class="body__container">
-        <div class="profile">
-          <div class="profile__inner">
-            <div class="profile__inner-main--txt">Мой профиль</div>
-            <div class="profile__inner-input">
-              <img
-                class="profile__inner-input--photo"
-                src="images/карточка.svg"
-                alt=""
-              />
-
-              <div class="profile__inner-input--forms">
-                <form class="profile__form">
-                  <label for="name">Фамилия и имя</label>
-                  <div class="profile__inner-input--knopka">
-                    <input
-                      class="profile__inner-input--name"
-                      type="text"
-                      name=""
-                      id="name"
-                    />
-                    <input
-                      class="profile__inner-input--btn"
-                      name=""
-                      type="submit"
-                      value="Сохранить"
-                    />
-                  </div>
-                </form>
-
-                <form class="profile__form">
-                  <label for="tel">Телефон</label>
-                  <div class="profile__inner-input--knopka">
-                    <input
-                      class="profile__inner-input--name"
-                      type="tel"
-                      name=""
-                      id="tel"
-                      pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
-                    />
-                    <input
-                      class="profile__inner-input--btn"
-                      name=""
-                      type="submit"
-                      value="Сохранить"
-                    />
-                  </div>
-                </form>
-
-                <form class="profile__form">
-                  <label for="email">Email</label>
-                  <div class="profile__inner-input--knopka">
-                    <input
-                      class="profile__inner-input--name"
-                      type="email"
-                      name=""
-                      id="email"
-                      placeholder="Email"
-                    />
-                    <input
-                      class="profile__inner-input--btn"
-                      name=""
-                      type="submit"
-                      value="Сохранить"
-                    />
-                  </div>
-                </form>
+        <div class="basket">
+        <div class="basket__main-txt">Корзина</div>
+        <div class="basket__cards">
+        <div class="basket__btns">
+          <div class="basket__cards">
+            <a href="#">
+              <div class="basket__order-card">
+                <img
+                  class="basket__order-card--img"
+                  src="images/рубашка.png"
+                  alt="card1"
+                />
+                <div class="basket__img-name-price">
+                <div class="basket__card-name">Рубашка женская oversize</div>
+                <div class="basket__card-price">
+                  999 ₽
+                </div>
+                <div class="basket__card-shop">
+                    <img class="basket__card-shop--img" src="images/магазин.svg" alt="">
+                    <div class="basket__card-shop--txt">Название магазина</div>
+                </div>
+            </div>
               </div>
             </div>
+            </a>
+            <input type="checkbox" id="checkbox" />
+            <label for="checkbox"></label>
+        </div>
+        <div class="basket__btns">
+              <a href="#">
+                <div class="basket__order-card">
+                  <img
+                    class="basket__order-card--img"
+                    src="images/рубашка.png"
+                    alt="card1"
+                  />
+                  <div class="basket__img-name-price">
+                  <div class="basket__card-name">Рубашка женская oversize</div>
+                  <div class="basket__card-price">
+                    999 ₽
+                  </div>
+                  <div class="basket__card-shop">
+                      <img class="basket__card-shop--img" src="images/магазин.svg" alt="">
+                      <div class="basket__card-shop--txt">Название магазина</div>
+                  </div>
+              </div>
+                </div>
+              </a>
+              <input type="checkbox" id="checkbox" />
+              <label for="checkbox"></label>
+          </div>
           </div>
 
-          <form class="profile__form">
-            <label class="profile__adress-txt" for="adress">Адрес</label>
-            <div class="profile__inner-input--knopka">
-              <input
-                class="profile__inner-input--adress"
-                type="text"
-                name=""
-                id="adress"
-              />
-              <input
-                class="profile__inner-input--btn"
-                name=""
-                type="submit"
-                value="Сохранить"
-              />
-            </div>
-          </form>
-
-          <a class="profile__inner-orders-btn" href="#">
-            <div class="btn__order">Заказы</div></a
-          >
+          
         </div>
-      </div>
-
+        </div>
+       
       <div class="footer">
         <div class="footer__container">
           <div class="footer__section-txt">
