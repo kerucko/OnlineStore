@@ -1,7 +1,7 @@
--- Количество товаров, пришедших на склад в определенный промежуток времени !store_id
+-- Количество товаров, пришедших на склад в определенный промежуток времени
 SELECT store.id, SUM(delivery.amount)
 FROM delivery
-JOIN store ON delivery.store_id = store.id AND store.id = 2
+JOIN store ON delivery.store_id = store.id AND store.address = 'г. Санкт-Петербург, пр. Победы, д. 25'
 WHERE delivery.date BETWEEN '2023-08-20' AND '2023-08-25'
 GROUP BY store.id;
 
@@ -32,11 +32,11 @@ HAVING SUM(p.price*op.amount) = (
   LIMIT 1
 );
 
--- Вывести все поставки на все склады определенного продавца !seller_id
+-- Вывести все поставки на все склады определенного продавца
 SELECT d.product_id, d.store_id, d.date, d.amount
 FROM delivery d
 JOIN store s ON d.store_id = s.id
-WHERE s.seller_id = 1
+JOIN seller se ON s.seller_id = se.id AND se.title = 'GeekMobile'
 ORDER BY d.store_id ASC, d.date DESC;
 
 -- Топ 10 самых популярных товаров
