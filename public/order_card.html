@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/fonts.css" />
@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/иконка.svg" />
     <title>OnlineStore</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="wrapper">
-        <div class="header">
+      <div class="header">
         <div class="header__container">
           <div class="header__logo">
             <a href="index.html">
@@ -51,7 +51,7 @@
               >
             </li>
             <li class="header__nav-box">
-              <a href="#">
+              <a href="basket.html">
                 <img
                   class="header__nav-img--basket"
                   src="images/корзина.svg"
@@ -62,76 +62,49 @@
             </li>
           </ul>
         </div>
-        </div>
-        <div class="body__container">
-        <div class="basket">
-            <div class="basket__top-menu">
-            <div class="basket__main-txt">Корзина</div>
-            <button class="basket__top-menu--btn"> Выбрать все </button>
+      </div>
+      <div class="body__container">
+        <div class="order__card">
+          <div class="order__card-main--txt">Рубашка женская oversize</div>
+          <div class="order__card-sections">
+            <div class="order__card-sections--1">
+              <img
+                class="order__card-sections--1img"
+                src="images/Рубашка женская-PhotoRoom 1.svg"
+                alt=""
+              />
             </div>
-        <div class="basket__cards">
-        <div class="basket__btns">
-          <div class="basket__cards">
-            <a href="#">
-              <div class="basket__order-card">
+            <div class="order__card-sections--2">
+              <div class="order__card-price--btn">
+                <div class="order__card-section--price">999 ₽</div>
+                <button class="order__card-section--btn">
+                  Добавить в корзину
+                </button>
+              </div>
+              <div class="order__card-section--txt">
+                <div class="order__card-section--main">Описание</div>
+                <div class="order__card-section--other">
+                  мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу
+                  мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу
+                  мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу мяу
+                  мяу мяу мяу мяу мяу
+                  
+                </div>
+              </div>
+              <div class="order__card-section--store">
                 <img
-                  class="basket__order-card--img"
-                  src="images/рубашка.png"
-                  alt="card1"
+                  class="order__card-section--img"
+                  src="images/магазин.svg"
+                  alt=""
                 />
-                <div class="basket__img-name-price">
-                <div class="basket__card-name">Рубашка женская oversize</div>
-                <div class="basket__card-price">
-                  999 ₽
-                </div>
-                <div class="basket__card-shop">
-                    <img class="basket__card-shop--img" src="images/магазин.svg" alt="">
-                    <div class="basket__card-shop--txt">Название магазина</div>
-                </div>
-            </div>
+                <div class="order__card-section--name">Название магазина</div>
               </div>
             </div>
-            </a>
-            <input type="checkbox" id="checkbox" />
-            <label for="checkbox"></label>
+          </div>
         </div>
-        <div class="basket__btns">
-            <a href="#">
-                <div class="basket__order-card">
-                <img
-                    class="basket__order-card--img"
-                    src="images/рубашка.png"
-                    alt="card1"
-                />
-                <div class="basket__img-name-price">
-                <div class="basket__card-name">Рубашка женская oversize</div>
-                <div class="basket__card-price">
-                    999 ₽
-                </div>
-                <div class="basket__card-shop">
-                    <img class="basket__card-shop--img" src="images/магазин.svg" alt="">
-                    <div class="basket__card-shop--txt">Название магазина</div>
-                </div>
-            </div>
-                </div>
-            </a>
-            <input type="checkbox" id="checkbox" />
-            <label for="checkbox"></label>
-        </div>
-        </div>
-        <div class="basket__bottom-menu">
-            <div class="basket__bottom-result">
-                <div class="basket__bottom-result--txt">Итого:</div>
-                <div class="basket__bottom-result--sum">1998 ₽</div>
-            </div>
-            <a class="basket__bottom-ordering" href="#">
-                <div class="basket__bottom-ordering--txt">К оформлению</div>
-            </a>
-        </div>
+      </div>
 
-        </div>
-        </div>
-    <div class="footer">
+      <div class="footer">
         <div class="footer__container">
           <div class="footer__section-txt">
             <ul>
@@ -168,9 +141,9 @@
             защищены.
           </div>
         </div>
-    </div>
+      </div>
     </div>
 
     <script src="script.js" defer></script>
-</body>
+  </body>
 </html>
