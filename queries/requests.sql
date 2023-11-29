@@ -48,7 +48,7 @@ ORDER BY total DESC
 LIMIT 10;
 
 -- Вывести всех пользователей, у которых хотя бы один заказ доставлен.
-SELECT customer_name, email, phone
+SELECT customer_name, email, phone, orders.id
 FROM customer 
 join orders on customer.id = orders.customer_id
 WHERE orders.customer_id = ANY(
