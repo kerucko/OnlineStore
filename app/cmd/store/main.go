@@ -5,9 +5,11 @@ import (
 	"OnlineStore/internal/handlers"
 	"OnlineStore/internal/storage/postgres"
 	"fmt"
+	"log"
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"log"
 )
 
 func main() {
@@ -22,5 +24,7 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
 	router.Get("/product", handlers.GetProductHandler(db, cfg.Timeout))
+
+	log.Fatal(http.ListenAndServe(cfg.Address, router))
 	// пишем обработчики
 }
