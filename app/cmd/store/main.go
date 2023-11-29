@@ -2,8 +2,11 @@ package main
 
 import (
 	"OnlineStore/internal/config"
+	"OnlineStore/internal/handlers"
 	"OnlineStore/internal/storage/postgres"
 	"fmt"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"log"
 )
 
@@ -16,6 +19,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	_ = db
+	router := chi.NewRouter()
+	router.Use(middleware.Logger)
+	router.Get("/product", handlers.GetProductHandler(db, cfg.Timeout))
 	// пишем обработчики
 }
