@@ -12,8 +12,8 @@ type Storage struct {
 	conn *pgx.Conn
 }
 
-func New(dbPath string) (*Storage, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Second*2))
+func New(dbPath string, timeout time.Duration) (*Storage, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
 	conn, err := pgx.Connect(ctx, dbPath)
