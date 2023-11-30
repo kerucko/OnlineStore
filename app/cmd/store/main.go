@@ -24,6 +24,7 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
 	router.Get("/product", handlers.GetProductHandler(db, cfg.Timeout))
+	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 
 	log.Fatal(http.ListenAndServe(":"+cfg.Server.Port, router))
 	// пишем обработчики
