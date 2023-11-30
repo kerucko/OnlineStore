@@ -1,10 +1,11 @@
 package config
 
 import (
-	"github.com/ilyakaznacheev/cleanenv"
 	"log"
 	"os"
 	"time"
+
+	"github.com/ilyakaznacheev/cleanenv"
 )
 
 type Config struct {
@@ -14,16 +15,16 @@ type Config struct {
 }
 
 type Server struct {
-	Address string        `yaml:"address"`
-	Timeout time.Duration `yaml:"timeout"`
+	Port string `yaml:"port"`
 }
 
 type Postgres struct {
-	Host     string `yaml:"host"`
-	Port     string `yaml:"port"`
-	DBName   string `yaml:"dbname"`
-	User     string `yaml:"user"`
-	Password string `yaml:"password"`
+	Host     string        `yaml:"host"`
+	Port     string        `yaml:"port"`
+	DBName   string        `yaml:"dbname"`
+	User     string        `yaml:"user"`
+	Password string        `yaml:"password"`
+	Timeout  time.Duration `yaml:"timeout"`
 }
 
 type Mongo struct {

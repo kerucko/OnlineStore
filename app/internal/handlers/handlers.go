@@ -32,6 +32,7 @@ func GetProductHandler(db *postgres.Storage, timeout time.Duration) http.Handler
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+		log.Printf("%s %s", op, id)
 
 		p := Product{
 			ID:          1,
