@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const price = document.createElement('div')
                     price.classList.add('one__of__categories-price')
                     price.innerText = data.products[i].price + " ₽"
-
+ 
                     inner_card.appendChild(img)
                     inner_card.appendChild(name)
                     inner_card.appendChild(price)
