@@ -1,6 +1,5 @@
 server:
-  address: "localhost:8080"
-  timeout: 4s
+  port: "8080"
 
 postgres:
   host: "db"
@@ -8,5 +7,6 @@ postgres:
   dbname: "postgres"
   user: "postgres"
   password: "postgres"
+  timeout: 4s
 
 mongo:

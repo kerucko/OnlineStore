@@ -15,7 +15,7 @@ import (
 func main() {
 	cfg := config.MustLoad()
 	dbPath := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
-		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName)
+		cfg.Host, cfg.Postgres.Port, cfg.User, cfg.Password, cfg.DBName)
 	log.Println(dbPath)
 	db, err := postgres.New(dbPath, cfg.Timeout)
 	if err != nil {
@@ -25,6 +25,6 @@ func main() {
 	router.Use(middleware.Logger)
 	router.Get("/product", handlers.GetProductHandler(db, cfg.Timeout))
 
-	log.Fatal(http.ListenAndServe(cfg.Address, router))
+	log.Fatal(http.ListenAndServe(":"+cfg.Server.Port, router))
 	// пишем обработчики
 }
