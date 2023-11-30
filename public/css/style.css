@@ -523,6 +523,7 @@ label {
 .basket {
   display: flex;
   flex-direction: column;
+  width: 1200px;
 }
 
 .basket__btns {
@@ -575,27 +576,6 @@ label {
   padding: 40px 0 0 30px;
   display: flex;
   flex-direction: row;
-}
-
-#checkbox {
-  /* display: none; */
-}
-
-#checkbox + label {
-  display: block;
-  width: 30px;
-  height: 30px;
-  background: #ffffff;
-  border: 3px solid #5c6b99;
-  border-radius: 20px;
-}
-
-#checkbox:checked + label {
-  background: #5c6b99;
-}
-
-#checkbox:checked + label:before {
-  color: green;
 }
 
 .basket__top-menu--btn {
@@ -669,6 +649,7 @@ label {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  width: 1200px;
 }
 .order__card-main--txt {
   font-weight: 600;
@@ -700,11 +681,12 @@ label {
   flex-direction: column;
   margin: 0 0 0 60px;
 }
+
 .order__card-price--btn {
   background: #fff;
   border-radius: 25px;
   box-shadow: 0 0 7px 0 #acacac;
-  width: 600px;
+  width: 520px;
   height: 200px;
   display: flex;
   flex-direction: column;
@@ -719,7 +701,7 @@ label {
 }
 .order__card-section--btn {
   background: #889bd3;
-  width: 500px;
+  width: 450px;
   height: 60px;
   font-weight: 600;
   font-size: 23px;
@@ -735,7 +717,7 @@ label {
   background: #fff;
   border-radius: 25px;
   box-shadow: 0 0 7px 0 #acacac;
-  width: 600px;
+  width: 520px;
   height: 250px;
   display: flex;
   flex-direction: column;
@@ -746,13 +728,12 @@ label {
   font-weight: 600;
   font-size: 30px;
 }
-.order__card-section--other {
-}
+
 .order__card-section--store {
   background: #fff;
   border-radius: 25px;
   box-shadow: 0 0 7px 0 #acacac;
-  width: 600px;
+  width: 520px;
   height: 100px;
   display: flex;
   align-items: center;
