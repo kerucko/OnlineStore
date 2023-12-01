@@ -3,7 +3,7 @@ services:
   app:
     container_name: backend
     build: ./
-    command: ./store
+    command: sh -c "sleep 3 && make migrate && ./store"
     ports:
       - "8080:8080"
     depends_on:
@@ -13,7 +13,7 @@ services:
   db:
     container_name: postgres
     restart: always
-    image: "postgres:16-alpine"
+    image: "postgres:15.4-alpine"
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
