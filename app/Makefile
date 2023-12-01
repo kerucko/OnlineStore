@@ -12,5 +12,7 @@ depend:
 lint:
 	golangci-lint run
 
+migrate:
+	goose -dir ./migrations postgres "user=postgres dbname=postgres password=postgres host=db" up
 clean:
 	rm store
