@@ -15,6 +15,9 @@ lint:
 migrate:
 	goose -dir ./migrations postgres "user=postgres dbname=postgres password=postgres host=db" up
 
+down:
+	goose -dir ./migrations postgres "user=postgres dbname=postgres password=postgres host=db" down
+
 reset:
 	goose -dir ./migrations postgres "user=postgres dbname=postgres password=postgres host=db" reset
 
