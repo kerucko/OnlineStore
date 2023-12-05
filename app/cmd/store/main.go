@@ -27,5 +27,4 @@ func main() {
 	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 	router.Get("/profile", handlers.GetCustomerProfileHandler(db, cfg.Timeout))
 	log.Fatal(http.ListenAndServe(":"+cfg.Server.Port, router))
-
 }

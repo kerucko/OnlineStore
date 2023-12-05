@@ -42,3 +42,22 @@ func (s *Storage) GetCustomerByID(id int, ctx context.Context) (entities.Custome
 	}
 	return customer, nil
 }
+
+func (s *Storage) GetProductByID(id int, ctx context.Context) (entities.Product, error) {
+	request := `
+	select p.title, p.description, p.price, s.title
+    	from product p 
+    	    join store_product on p.id = store_product.product_id
+    		join store on store_product.store_id = store.id
+    		join seller s on store.seller_id = s.id
+    	where p.id = $1
+    `
+	var product entities.Product
+	product.ID = id
+	row := s.conn.QueryRow(ctx, request, id)
+	err := row.Scan(&product.Title, &product.Description, &product.Price, &product.Shop)
+	if err != nil {
+		return entities.Product{}, storage.ErrNotExist
+	}
+	return product, nil
+}

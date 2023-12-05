@@ -7,3 +7,16 @@ type Customer struct {
 	Phone   string `json:"phone"`
 	Address string `json:"address"`
 }
+
+type Product struct {
+	ID          int    `json:"id"`
+	Title       string `json:"title"`
+	Price       int    `json:"price"`
+	Description string `json:"description"`
+	Shop        string `json:"shop"`
+}
+
+type Category struct {
+	Name     string    `json:"name"`
+	Products []Product `json:"products"`
+}

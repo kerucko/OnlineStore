@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"OnlineStore/internal/entities"
 	"OnlineStore/internal/storage"
 	"OnlineStore/internal/storage/postgres"
 	"context"
@@ -13,49 +14,33 @@ import (
 	"time"
 )
 
-type Product struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Price       int    `json:"price"`
-	Description string `json:"description"`
-	Shop        string `json:"shop"`
-}
-
-type Category struct {
-	Name     string    `json:"name"`
-	Products []Product `json:"products"`
-}
-
 func GetProductHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
 	op := "GetProductHandler:"
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "application/json")
 
-		// ctx, cancel := context.WithTimeout(r.Context(), timeout)
-		id := r.URL.Query().Get("id")
-		_, err := strconv.Atoi(id)
+		productID, err := strconv.Atoi(r.URL.Query().Get("id"))
 		if err != nil {
 			log.Printf("%s %s", op, err)
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		log.Printf("%s %s", op, id)
-
-		p := Product{
-			ID:          1,
-			Name:        "test",
-			Price:       1,
-			Description: "test",
-			Shop:        "test",
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+		product, err := db.GetProductByID(productID, ctx)
+		if errors.Is(err, storage.ErrNotExist) {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusNotFound)
+			return
 		}
-		jsonBytes, err := json.Marshal(p)
+		err = json.NewEncoder(w).Encode(product)
 		if err != nil {
-			log.Printf("%s %s", op, err)
+			log.Printf("%s %v", op, err)
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		fmt.Fprintf(w, string(jsonBytes))
+		log.Printf("%s sending reply %v", op, product)
 	}
 }
 
@@ -68,75 +53,75 @@ func GetCategoryHandler(db *postgres.Storage, timeout time.Duration) http.Handle
 		category := r.URL.Query().Get("category")
 		log.Printf("%s %s", op, category)
 
-		ps := Category{
+		ps := entities.Category{
 			Name: "test",
-			Products: []Product{
+			Products: []entities.Product{
 				{
 					ID:          1,
-					Name:        "Product 1",
+					Title:       "Product 1",
 					Price:       10,
 					Description: "This is product 1",
 					Shop:        "Shop A",
 				},
 				{
 					ID:          2,
-					Name:        "Product 2",
+					Title:       "Product 2",
 					Price:       20,
 					Description: "This is product 2",
 					Shop:        "Shop B",
 				},
 				{
 					ID:          3,
-					Name:        "Product 3",
+					Title:       "Product 3",
 					Price:       30,
 					Description: "This is product 3",
 					Shop:        "Shop C",
 				},
 				{
 					ID:          4,
-					Name:        "Product 4",
+					Title:       "Product 4",
 					Price:       40,
 					Description: "This is product 4",
 					Shop:        "Shop D",
 				},
 				{
 					ID:          5,
-					Name:        "Product 5",
+					Title:       "Product 5",
 					Price:       50,
 					Description: "This is product 5",
 					Shop:        "Shop E",
 				},
 				{
 					ID:          6,
-					Name:        "Product 6",
+					Title:       "Product 6",
 					Price:       60,
 					Description: "This is product 6",
 					Shop:        "Shop F",
 				},
 				{
 					ID:          7,
-					Name:        "Product 7",
+					Title:       "Product 7",
 					Price:       70,
 					Description: "This is product 7",
 					Shop:        "Shop G",
 				},
 				{
 					ID:          8,
-					Name:        "Product 8",
+					Title:       "Product 8",
 					Price:       80,
 					Description: "This is product 8",
 					Shop:        "Shop H",
 				},
 				{
 					ID:          9,
-					Name:        "Product 9",
+					Title:       "Product 9",
 					Price:       90,
 					Description: "This is product 9",
 					Shop:        "Shop I",
 				},
 				{
 					ID:          10,
-					Name:        "Product 10",
+					Title:       "Product 10",
 					Price:       100,
 					Description: "This is product 10",
 					Shop:        "Shop J",
@@ -157,12 +142,16 @@ func GetCategoryHandler(db *postgres.Storage, timeout time.Duration) http.Handle
 func GetCustomerProfileHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
 	op := "GetCustomerProfileHandler:"
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+
 		customerID, err := strconv.Atoi(r.URL.Query().Get("id"))
 		if err != nil {
 			log.Printf("%s %v", op, err)
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 		customer, err := db.GetCustomerByID(customerID, ctx)
@@ -178,13 +167,13 @@ func GetCustomerProfileHandler(db *postgres.Storage, timeout time.Duration) http
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		w.Header().Set("Content-Type", "application/json")
+
 		err = json.NewEncoder(w).Encode(customer)
 		if err != nil {
 			log.Printf("%s encode: %v", op, err)
 			w.WriteHeader(http.StatusInternalServerError)
-		} else {
-			log.Printf("%s sending reply %v", op, customer)
+			return
 		}
+		log.Printf("%s sending reply %v", op, customer)
 	}
 }
