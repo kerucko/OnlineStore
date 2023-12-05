@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"OnlineStore/internal/storage"
 	"OnlineStore/internal/storage/postgres"
+	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -154,12 +157,34 @@ func GetCategoryHandler(db *postgres.Storage, timeout time.Duration) http.Handle
 func GetCustomerProfileHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
 	op := "GetCustomerProfileHandler:"
 	return func(w http.ResponseWriter, r *http.Request) {
-		customerID, err := strconv.Atoi(r.URL.Query().Get("customer_id"))
+		customerID, err := strconv.Atoi(r.URL.Query().Get("id"))
 		if err != nil {
 			log.Printf("%s %v", op, err)
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		log.Println(customerID)
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
+		defer cancel()
+		customer, err := db.GetCustomerByID(customerID, ctx)
+		switch {
+		case errors.Is(err, storage.ErrNotExist):
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		case err == nil:
+			log.Printf("%s Success", op)
+		default:
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		err = json.NewEncoder(w).Encode(customer)
+		if err != nil {
+			log.Printf("%s encode: %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+		} else {
+			log.Printf("%s sending reply %v", op, customer)
+		}
 	}
 }
