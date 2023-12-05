@@ -150,3 +150,16 @@ func GetCategoryHandler(db *postgres.Storage, timeout time.Duration) http.Handle
 		fmt.Fprintf(w, string(jsonBytes))
 	}
 }
+
+func GetCustomerProfileHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
+	op := "GetCustomerProfileHandler:"
+	return func(w http.ResponseWriter, r *http.Request) {
+		customerID, err := strconv.Atoi(r.URL.Query().Get("customer_id"))
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		log.Println(customerID)
+	}
+}
