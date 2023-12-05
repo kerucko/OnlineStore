@@ -18,3 +18,9 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5436:5432"
+  node:
+    container_name: node
+    build: ../public
+    ports:
+      - "3000:3000"
+    command: http-server -p 3000
