@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             // JSON {name, price, description, shop}
             const name = document.getElementById("name");
-            name.innerText = data.name;
+            name.innerText = data.title;
 
             const price = document.getElementById("price");
             price.innerText = data.price + " ₽";
