@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("http://127.0.0.1:8080/show_all?category=" + category) // отправка GET-запроса на сервер
         .then(response => response.json()) // получение текстового ответа
         .then(data => {
+            console.log(data)
             // JSON {name, [{name, price, description, shop}]}
             const category_name = document.getElementById("name");
             category_name.innerText = data.name;
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const name = document.createElement('div')
                     name.classList.add('one__of__categories-name')
-                    name.innerText = data.products[i].name
+                    name.innerText = data.products[i].title
 
                     const price = document.createElement('div')
                     price.classList.add('one__of__categories-price')

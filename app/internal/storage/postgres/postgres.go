@@ -61,3 +61,26 @@ func (s *Storage) GetProductByID(id int, ctx context.Context) (entities.Product,
 	}
 	return product, nil
 }
+
+func (s *Storage) GetAllProductFromCategory(categoryName string, ctx context.Context) (entities.Category, error) {
+	var category entities.Category
+	category.Name = categoryName
+	request := "select p.id, p.title, p.price from product p join category c on p.category_id = c.id where c.title = $1"
+	rows, err := s.conn.Query(ctx, request, categoryName)
+	if err != nil {
+		return entities.Category{}, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var product entities.Product
+		err = rows.Scan(&product.ID, &product.Title, &product.Price)
+		if err != nil {
+			return entities.Category{}, err
+		}
+		category.Products = append(category.Products, product)
+	}
+	if category.Products == nil {
+		return entities.Category{}, storage.ErrNotExist
+	}
+	return category, nil
+}
