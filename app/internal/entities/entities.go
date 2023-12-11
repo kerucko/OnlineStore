@@ -6,6 +6,7 @@ type Customer struct {
 	Email   string `json:"email"`
 	Phone   string `json:"phone"`
 	Address string `json:"address"`
+	Password string `json:"password"`
 }
 
 type Product struct {

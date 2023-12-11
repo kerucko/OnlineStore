@@ -5,9 +5,10 @@ import (
 	"OnlineStore/internal/storage"
 	"context"
 	"fmt"
-	"github.com/jackc/pgx/v5"
 	"log"
 	"time"
+
+	"github.com/jackc/pgx/v5"
 )
 
 type Storage struct {
@@ -83,4 +84,19 @@ func (s *Storage) GetAllProductFromCategory(categoryName string, ctx context.Con
 		return entities.Category{}, storage.ErrNotExist
 	}
 	return category, nil
+}
+
+func (s *Storage) GetCustomerByEmail(email string, ctx context.Context) (entities.Customer, error) {
+	request := `
+		SELECT id, customer_name, email, phone, address
+		FROM customer
+		WHERE email = $1
+	`
+	var customer entities.Customer
+	row := s.conn.QueryRow(ctx, request, email)
+	err := row.Scan(&customer.ID, &customer.Name, &customer.Email, &customer.Phone, &customer.Address)
+	if err != nil {
+		return entities.Customer{}, storage.ErrNotExist
+	}
+	return customer, nil
 }
