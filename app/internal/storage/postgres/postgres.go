@@ -100,3 +100,30 @@ func (s *Storage) GetCustomerByEmail(email string, ctx context.Context) (entitie
 	}
 	return customer, nil
 }
+
+func (s *Storage) GetAllSellersProducts(sellerID int, ctx context.Context) ([]entities.StoreProduct, error) {
+	request := `
+		select p.title, p.photo_path, sp.amount, s.address
+		from product p 
+		join store_product sp on p.id = sp.product_id
+		join store s on sp.store_id = s.id
+		join seller on s.seller_id = seller.id
+		where seller.id = $1
+		order by p.title
+	`
+	var products []entities.StoreProduct
+	rows, err := s.conn.Query(ctx, request, sellerID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var product entities.StoreProduct
+		err = rows.Scan(&product.Title, &product.PhotoPath, &product.Amount, &product.StoreAddress)
+		if err != nil {
+			return nil, err
+		}
+		products = append(products, product)
+	}
+	return products, nil
+}

@@ -27,5 +27,6 @@ func main() {
 	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 	router.Get("/profile", handlers.GetCustomerProfileHandler(db, cfg.Timeout))
 	router.Get("/signin", handlers.SignInHandler(db, cfg.Timeout))
+	router.Get("/seller", handlers.GetSellersProductsHandler(db, cfg.Timeout))
 	log.Fatal(http.ListenAndServe(":"+cfg.Server.Port, router))
 }
