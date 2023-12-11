@@ -510,7 +510,7 @@ label {
   align-items: center;
   font-size: 35px;
   font-weight: 600;
-  color: #000;
+  color: #e21212;
 }
 
 .sales__card-basket {
@@ -744,4 +744,235 @@ label {
 }
 .order__card-section--name {
   margin: 0 0 0 10px;
+}
+
+/*--------------------------------------------------*/
+
+.seller__body-btns {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.seller__body-btn {
+  background: #889bd3;
+  width: 300px;
+  height: 80px;
+  border-radius: 20px;
+  margin: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seller__body-btn--txt {
+  font-weight: 600;
+  font-size: 30px;
+  color: #fff;
+}
+
+.seller__body-btn:hover {
+  transition: 0.4s;
+  box-shadow: 0 0 10px #5c6b99;
+}
+
+/*--------------------------------------------------*/
+
+.seller__products-top--menu {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.seller__top-menu--btn{
+background: #889bd3;
+width: 270px;
+height: 60px;
+border-radius: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 25px;
+font-weight: 600;
+color: #fff;
+}
+
+.seller__top-menu--btn:hover {
+  transition: 0.4s;
+  box-shadow: 0 0 10px #5c6b99;
+}
+
+.seller__products-main--txt {
+  font-weight: 600;
+  font-size: 35px;
+}
+
+.seller__products {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.seller__products-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #fff;
+  width: 1050px;
+  border-radius: 25px;
+  box-shadow: 0 0 7px 0 #acacac;
+  margin: 50px 0 50px 0;
+}
+.seller__products-card--img {
+  padding: 20px;
+}
+.seller__card-name {
+  font-size: 25px;
+  padding: 40px 0 20px 30px;
+}
+.seller__card-storage--txt {
+  margin: 250px 0 0 30px;
+  font-size: 20px;
+}
+
+.seller__card-quantity {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  margin: 150px 0 0 0;
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center
+}
+
+.seller__card-quantity--num {
+  margin: 20px;
+  font-size: 40px;
+}
+
+/**/
+
+.seller__inner-input--name {
+  background-color: #fff;
+  color: #424243;
+  box-shadow: 0 0 5px #7e8080;
+  height: 50px;
+  width: 300px;
+  border-radius: 25px;
+  margin: 20px;
+  padding: 0 20px 0 20px;
+}
+
+.seller__form{
+  margin: 20px;
+}
+
+.shop_quantity{
+  display: flex;
+  justify-content: space-between;
+}
+
+.seller__card-section--store{
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 0 7px 0 #acacac;
+  width: 350px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.seller__card-section--quantity{
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 0 7px 0 #acacac;
+  width: 150px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.seller__form-adr{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.seller__inner-input--adr{
+  background-color: #fff;
+  color: #424243;
+  box-shadow: 0 0 5px #7e8080;
+  height: 35px;
+  width: 220px;
+  border-radius: 25px;
+  margin: 10px 0 0 40px;
+  padding: 0 20px 0 20px;
+}
+
+.seller__inner-input--name-adr{
+  font-size: 18px;
+  margin: 0 0 0 40px;
+}
+
+.seller__form-q{
+  display: flex;
+  flex-direction: column;
+}
+
+.seller__inner-input--q{
+  background-color: #fff;
+  color: #424243;
+  box-shadow: 0 0 5px #7e8080;
+  height: 35px;
+  width: 105px;
+  border-radius: 25px;
+  margin: 10px 0 0 25px;
+  padding: 0 20px 0 20px;
+}
+
+.seller__inner-input--name-q{
+  font-size: 18px;
+  margin: 0 0 0 20px;
+}
+
+.input_img{
+  margin: 30px;
+}
+
+.seller__save{
+  background: #889bd3;
+  width: 270px;
+  height: 60px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+  }
+  
+  .seller__save:hover {
+    transition: 0.4s;
+    box-shadow: 0 0 10px #5c6b99;
+  }
+
+  .seller__order__card{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 1200px;
+  }
+  
+  .seller__profile__form{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile__inner-input--knopka{
+    display: flex;
+    justify-content: space-between;
+  }
+
+.input__txt{
+  color: #7e8080;
 }

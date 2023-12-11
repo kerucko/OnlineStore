@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="images/иконка.svg" />
+    <title>О товаре</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="header__container">
+              <div class="header__logo">
+                <a href="index.html">
+                  <img src="images/OnlineStore (продавец).svg" alt="Logo" />
+                </a>
+              </div>
+            </div>
+          </div>
+      <div class="body__container">
+        <div class="seller__order__card">
+          <!-- NAME -->
+          <div class="profile__inner-input--knopka">
+            <form class="seller__profile__form">
+                <label for="name">Введите название товара</label>
+                  <input
+                    class="seller__inner-input--name"
+                    type="text"
+                    name=""
+                    id="name"
+                  />
+          </form>
+          <div class="seller__save__btn">
+          <input class ="seller__save" type="submit">
+        </div>
+        </div>
+          <div class="order__card-sections">
+            <div class="order__card-sections--1">
+              <!-- IMAGE -->
+              <form class="input_img" enctype="multipart/form-data" method="post">
+                <input class="input__txt" type="file" name="f">
+               </form> 
+            </div>
+            <div class="order__card-sections--2">
+              <div class="order__card-price--btn">
+                <!-- PRICE -->
+                <form class="seller__form">
+                <!-- <div class="order_card-section--price" id="price">000 ₽</div> -->
+                <label class="seller__inner-input--price" for="name">Введите цену товара</label>
+                <input
+                class="seller__inner-input--name"
+                type="text"
+                name=""
+                id="price"
+              />
+            </form>
+              </div>
+                <div class="order__card-price--btn">
+                    <!-- PRICE -->
+                    <form class="seller__form">
+                    <!-- <div class="order_card-section--price" id="price">000 ₽</div> -->
+                    <label class="seller__inner-input--price" for="name">Введите описание товара</label>
+                    <input
+                    class="seller__inner-input--name"
+                    type="text"
+                    name=""
+                    id="price"
+                  />
+                </form>
+              </div>
+              
+              <div class="shop_quantity">
+              <div class="seller__card-section--store">
+                <form class="seller__form-adr">
+                    <!-- <div class="order_card-section--price" id="price">000 ₽</div> -->
+                    <label class="seller__inner-input--name-adr" for="name">Введите адрес склада</label>
+                    <input
+                    class="seller__inner-input--adr"
+                    type="text"
+                    name=""
+                    id="price"
+                  />
+                </form>
+              </div>
+              <div class="seller__card-section--quantity">
+                <form class="seller__form-q">
+                    <!-- <div class="order_card-section--price" id="price">000 ₽</div> -->
+                    <label class="seller__inner-input--name-q" for="name">Количество</label>
+                    <input
+                    class="seller__inner-input--q"
+                    type="text"
+                    name=""
+                    id="price"
+                  />
+                </form>
+                <!-- <div class="seller__card-section--name" id="shop">Количество</div> -->
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="footer">
+        <div class="footer__container">
+          <div class="footer__section-txt">
+            <ul>
+              <li class="footer__bold-txt">О магазине</li>
+              <a href="#"><li>Акции и скидки</li></a>
+              <a href="#"><li>Юридическим лицам</li></a>
+              <a href="#"><li>Как заказать</li></a>
+              <a href="#"><li>Обмен и возврат</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Клиентам</li>
+              <a href="#"><li>Личный кабинет</li></a>
+              <a href="#"><li>Мои заказы</li></a>
+              <a href="#"><li>Вопросы и ответы</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Информация</li>
+              <a href="#"><li>Политика конфиденциальности и оферта</li></a>
+              <a href="#"><li>Пользовательское соглашение</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Мы в соцсетях</li>
+              <a href=""><li>ВКонтакте</li></a>
+              <a href=""><li>YouTube</li></a>
+              <a href=""><li>Телеграм</li></a>
+            </ul>
+          </div>
+          <img class="footer__line-decor" src="images/Line.png" alt="" />
+          <div class="footer__logo-cards">
+            <div class="footer__brand-logo">OnlineStore</div>
+          </div>
+          <div class="footer__c">
+            © OnlineStore - маркетплейс товаров различных категорий. Все права
+            защищены.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="product.js" defer></script>
+  </body>
+</html>
