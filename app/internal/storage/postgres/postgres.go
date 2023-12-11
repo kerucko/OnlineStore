@@ -46,7 +46,7 @@ func (s *Storage) GetCustomerByID(id int, ctx context.Context) (entities.Custome
 
 func (s *Storage) GetProductByID(id int, ctx context.Context) (entities.Product, error) {
 	request := `
-	select p.title, p.description, p.price, s.title
+	select p.title, p.description, p.price, p.photo_path, s.title
     	from product p 
     	    join store_product on p.id = store_product.product_id
     		join store on store_product.store_id = store.id
@@ -56,7 +56,7 @@ func (s *Storage) GetProductByID(id int, ctx context.Context) (entities.Product,
 	var product entities.Product
 	product.ID = id
 	row := s.conn.QueryRow(ctx, request, id)
-	err := row.Scan(&product.Title, &product.Description, &product.Price, &product.Shop)
+	err := row.Scan(&product.Title, &product.Description, &product.Price, &product.PhotoPath, &product.Shop)
 	if err != nil {
 		return entities.Product{}, storage.ErrNotExist
 	}
@@ -66,7 +66,7 @@ func (s *Storage) GetProductByID(id int, ctx context.Context) (entities.Product,
 func (s *Storage) GetAllProductFromCategory(categoryName string, ctx context.Context) (entities.Category, error) {
 	var category entities.Category
 	category.Name = categoryName
-	request := "select p.id, p.title, p.price from product p join category c on p.category_id = c.id where c.title = $1"
+	request := "select p.id, p.title, p.price, p.photo_path from product p join category c on p.category_id = c.id where c.title = $1"
 	rows, err := s.conn.Query(ctx, request, categoryName)
 	if err != nil {
 		return entities.Category{}, err
@@ -74,7 +74,7 @@ func (s *Storage) GetAllProductFromCategory(categoryName string, ctx context.Con
 	defer rows.Close()
 	for rows.Next() {
 		var product entities.Product
-		err = rows.Scan(&product.ID, &product.Title, &product.Price)
+		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath)
 		if err != nil {
 			return entities.Category{}, err
 		}

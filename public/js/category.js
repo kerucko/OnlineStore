@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const img = document.createElement('img')
                     img.classList.add('one__of__categories-img')
-                    img.setAttribute('src', 'images/рубашка.png')
+                    img.setAttribute('src', data.products[i].photo_path)
                     img.setAttribute('alt', 'card' + i)
 
                     const name = document.createElement('div')

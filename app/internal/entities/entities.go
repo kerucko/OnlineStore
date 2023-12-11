@@ -1,11 +1,11 @@
 package entities
 
 type Customer struct {
-	ID      int    `json:"id"`
-	Name    string `json:"name"`
-	Email   string `json:"email"`
-	Phone   string `json:"phone"`
-	Address string `json:"address"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Phone    string `json:"phone"`
+	Address  string `json:"address"`
 	Password string `json:"password"`
 }
 
@@ -14,6 +14,7 @@ type Product struct {
 	Title       string `json:"title"`
 	Price       int    `json:"price"`
 	Description string `json:"description"`
+	PhotoPath   string `json:"photo_path"`
 	Shop        string `json:"shop"`
 }
 

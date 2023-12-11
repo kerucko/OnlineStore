@@ -15,6 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const description = document.getElementById("description");
             description.innerText = data.description;
 
+            const img = document.createElement('img');
+            img.classList.add("order__card-sections--1img")
+            img.src = data.photo_path
+            img.alt = ""
+            const container = document.getElementById("photo")
+            container.append(img)
+
             const shop = document.getElementById("shop");
             shop.innerText = data.shop;
         })

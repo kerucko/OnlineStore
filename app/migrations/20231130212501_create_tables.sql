@@ -12,7 +12,7 @@ CREATE TABLE product (
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     price BIGINT NOT NULL,
-    url_photo VARCHAR(255) NOT NULL,
+    photo_path VARCHAR(255) NOT NULL,
     category_id BIGINT NOT NULL REFERENCES category(id)
 );
 
