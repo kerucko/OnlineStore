@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+    const id = localStorage.getItem("id");
     console.log("UserID", id);
     fetch("http://127.0.0.1:8080/profile?id=" + id) // отправка GET-запроса на сервер
         .then(response => response.json()) // получение текстового ответа
