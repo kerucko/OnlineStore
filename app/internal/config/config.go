@@ -11,7 +11,6 @@ import (
 type Config struct {
 	Server   `yaml:"server"`
 	Postgres `yaml:"postgres"`
-	Mongo    `yaml:"mongo"`
 }
 
 type Server struct {
@@ -25,9 +24,6 @@ type Postgres struct {
 	User     string        `yaml:"user"`
 	Password string        `yaml:"password"`
 	Timeout  time.Duration `yaml:"timeout"`
-}
-
-type Mongo struct {
 }
 
 func MustLoad() Config {
