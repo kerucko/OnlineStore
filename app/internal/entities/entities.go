@@ -22,3 +22,10 @@ type Category struct {
 	Name     string    `json:"name"`
 	Products []Product `json:"products"`
 }
+
+type StoreProduct struct {
+	Title        string
+	Amount       int
+	StoreAddress string
+	PhotoPath    string
+}
