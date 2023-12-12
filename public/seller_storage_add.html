@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/иконка.svg" />
-    <title>Все продукты</title>
+    <title>Добавить склад</title>
   </head>
 
   <body>
@@ -21,33 +21,25 @@
           </div>
         </div>
       </div>
+
       <div class="body__container">
-        <div class="seller__products">
-          <div class="seller__products-top--menu">
-            <div class="seller__products-main--txt">Все продукты</div>
-            <a href="seller_product_card.html"
-              ><div class="seller__top-menu--btn">Добавить товары</div>
-            </a>
-          </div>
-          <div class="seller__products-card">
-            <img
-              class="seller__products-card--img"
-              src="images/рубашка.png"
-              alt="card1"
+          <form class="storage__form">
+            <label class="storage__inner-input" for="name"
+              >Введите адрес склада</label
+            >
+            <input
+              class="storage__inner-input--name"
+              type="text"
+              name=""
+              id="price"
             />
-            <div class="seller__img-name-price">
-              <div class="seller__name-storage">
-                <div class="seller__card-name">Рубашка женская oversize</div>
-                <div class="seller__card-storage--txt">Склад: мяу мяу мяу мяу мяу мяу</div>
-              </div>
-            </div>
-            <div class="seller__card-quantity">
-              Количество <br> на складе:
-              <div class="seller__card-quantity--num">12</div>
-            </div>
-          </div>
-        </div>
+            <!-- <div class="seller__save__btn"> -->
+                <input class ="storage__save__btn" type="submit"/>
+          </form>
+          <a class="storage__btn" href="seller_storage.html"> К списку складов </a>
+        <!-- </div> -->
       </div>
+    </div>
 
       <div class="footer">
         <div class="footer__container">

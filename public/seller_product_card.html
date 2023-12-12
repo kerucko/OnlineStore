@@ -15,8 +15,8 @@
         <div class="header">
             <div class="header__container">
               <div class="header__logo">
-                <a href="index.html">
-                  <img src="images/OnlineStore.svg" alt="Logo" />
+                <a href="seller.html">
+                  <img src="images/OnlineStore (продавец).svg" alt="Logo" />
                 </a>
               </div>
             </div>
@@ -26,6 +26,7 @@
           <!-- NAME -->
           <div class="profile__inner-input--knopka">
             <form class="seller__profile__form">
+              <div class="seller__profile_one">
                 <label for="name">Введите название товара</label>
                   <input
                     class="seller__inner-input--name"
@@ -33,9 +34,25 @@
                     name=""
                     id="name"
                   />
+                </div>
+                <div class="seller__profile_two">
+                    <label for="category">Выберите категорию:</label>
+                    <select class="seller__select" id="category">
+                      <option >Женская одежда</option>
+                      <option >Мужская одежда</option>
+                      <option >Техника</option>
+                      <option >Дом и сад</option>
+                      <option >Строительство и ремонт</option>
+                      <option >Красота</option>
+                      <option >Здоровье</option>
+                      <option >Спорт</option>
+                      <option >Книги</option>
+                      <option >Хобби</option>
+                    </select>
+                  </div>
           </form>
           <div class="seller__save__btn">
-          <input class ="seller__save" type="submit">
+          <input class ="seller__save" type="submit"/>
         </div>
         </div>
           <div class="order__card-sections">
@@ -43,7 +60,7 @@
               <!-- IMAGE -->
               <form class="input_img" enctype="multipart/form-data" method="post">
                 <input class="input__txt" type="file" name="f">
-               </form> 
+              </form> 
             </div>
             <div class="order__card-sections--2">
               <div class="order__card-price--btn">
