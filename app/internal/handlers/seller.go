@@ -137,3 +137,39 @@ func NewProductHandler(db *postgres.Storage, timeout time.Duration) http.Handler
 		}
 	}
 }
+
+func NewSellerStoreHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
+	op := "NewSellerStoreHandler:"
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+
+		sellerID, err := strconv.Atoi(r.URL.Query().Get("id"))
+		if err != nil {
+			log.Printf("%s %s", op, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
+			log.Printf("%s: ReadAll %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		var store entities.Store
+		err = json.Unmarshal(body, &store)
+		if err != nil {
+			log.Printf("%s: Unmarshal %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		log.Println(store)
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+		err = db.AddNewStore(ctx, sellerID, store.Address)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+	}
+}

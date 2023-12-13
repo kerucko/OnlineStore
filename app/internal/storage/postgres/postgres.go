@@ -245,3 +245,12 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 	}
 	return nil
 }
+
+func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string) error {
+	insertSQL := "insert into store(address, seller_id) values($1, $2)"
+	_, err := s.conn.Exec(ctx, insertSQL, sellerID, address)
+	if err != nil {
+		return err
+	}
+	return nil
+}
