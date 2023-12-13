@@ -154,7 +154,7 @@ func (s *Storage) GetSellerStores(sellerID int, ctx context.Context) ([]entities
 
 func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]entities.Delivery, error) {
 	request := `
-		select s.id, p.title, p.photo_path, d.date, d.amount
+		select p.title, p.photo_path, d.date, d.amount, s.address
 		from product p 
 		join delivery d on p.id = d.product_id
 		join store s on d.store_id = s.id
@@ -163,7 +163,7 @@ func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]enti
 		order by s.id, d.date
 	`
 	prevData := time.Time{}
-	prevStoreID := -1
+	prevStoreAddress := ""
 	var deliveries []entities.Delivery
 	rows, err := s.conn.Query(ctx, request, sellerID)
 	if err != nil {
@@ -173,16 +173,16 @@ func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]enti
 	for rows.Next() {
 		var delivery entities.Delivery
 		var curProduct entities.StoreProduct
-		err = rows.Scan(&delivery.StoreID, &curProduct.Title, &curProduct.PhotoPath, &delivery.Data, &curProduct.Amount)
+		err = rows.Scan(&curProduct.Title, &curProduct.PhotoPath, &delivery.Data, &curProduct.Amount, &curProduct.StoreAddress)
 		if err != nil {
 			return nil, err
 		}
-		if prevData != delivery.Data || prevStoreID != delivery.StoreID {
+		if prevData != delivery.Data || prevStoreAddress != curProduct.StoreAddress {
 			deliveries = append(deliveries, delivery)
 		}
 		deliveries[len(deliveries)-1].Products = append(deliveries[len(deliveries)-1].Products, curProduct)
 		prevData = delivery.Data
-		prevStoreID = delivery.StoreID
+		prevStoreAddress = curProduct.StoreAddress
 	}
 	return deliveries, nil
 }
@@ -214,7 +214,6 @@ func (s *Storage) getStoreID(ctx context.Context, sellerID int, address string) 
 	return id, nil
 }
 
-// TODO: Не добавляет в store_product
 func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProduct, sellerID int) error {
 	categoryID, err := s.getCategoryID(ctx, object.CategoryTitle)
 	if err != nil {
@@ -247,7 +246,6 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 	return nil
 }
 
-
 func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Product, error) {
 	request := `
 		SELECT p. id, p.title, p.price, p.photo_path, se.title
@@ -276,4 +274,13 @@ func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Produ
 	}
 
 	return cart, nil
+}
+
+func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string) error {
+	insertSQL := "insert into store(address, seller_id) values($1, $2)"
+	_, err := s.conn.Exec(ctx, insertSQL, sellerID, address)
+	if err != nil {
+		return err
+	}
+	return nil
 }
