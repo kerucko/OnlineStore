@@ -121,12 +121,12 @@ func NewProductHandler(db *postgres.Storage, timeout time.Duration) http.Handler
 		}
 		var object entities.InsertProduct
 		err = json.Unmarshal(body, &object)
-		log.Println(object)
 		if err != nil {
 			log.Printf("%s: Unmarshal %v", op, err)
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
+		log.Println(object)
 		ctx, cancel := context.WithTimeout(r.Context(), timeout)
 		defer cancel()
 		err = db.AddNewProduct(ctx, object, sellerID)
