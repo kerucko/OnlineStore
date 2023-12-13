@@ -864,7 +864,7 @@ label {
   padding: 0 20px 0 20px;
 }
 
-.storage__save__btn{
+.storage__save__btn {
   background: #889bd3;
   width: 270px;
   height: 60px;
@@ -877,7 +877,7 @@ label {
   color: #fff;
 }
 
-.storage__save__btn:hover{
+.storage__save__btn:hover {
   transition: 0.4s;
   box-shadow: 0 0 10px #5c6b99;
 }
@@ -1064,7 +1064,7 @@ label {
   margin: 0 0 0 -10px;
 }
 
-.storage__inner-input--name{
+.storage__inner-input--name {
   background-color: #fff;
   color: #424243;
   box-shadow: 0 0 5px #7e8080;
@@ -1076,23 +1076,23 @@ label {
   font-size: 23px;
 }
 
-.seller__card-date{
+.seller__card-date {
   font-size: 25px;
   padding: 10px 0 0 30px;
   font-weight: 600;
 }
 
-.seller__card-date1{
+.seller__card-date1 {
   margin: 10px 0 0 0;
   font-weight: 600;
 }
 
-.seller__card-delivery--txt{
+.seller__card-delivery--txt {
   margin: 180px 0 0 30px;
   font-size: 20px;
 }
 
-.storage__btn{
+.storage__btn {
   background: #889bd3;
   width: 270px;
   height: 60px;
@@ -1106,14 +1106,45 @@ label {
   margin: 40px 0 0 0;
 }
 
-.storage__save__btn:hover{
+.storage__save__btn:hover {
   transition: 0.4s;
   box-shadow: 0 0 10px #5c6b99;
 }
 
-.order__card-name{
+.order__card-name {
   margin: 90px 0 0 0;
   font-size: 25px;
   padding: 10px 0 0 30px;
   font-weight: 600;
+}
+
+.sign__btn {
+  background: #889bd3;
+  width: 270px;
+  height: 60px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+  margin: 40px 0 0 138px;
+}
+
+.sign__btn:hover {
+  transition: 0.4s;
+  box-shadow: 0 0 10px #5c6b99;
+}
+
+.signin__products-main--txt{
+  font-weight: 600;
+  font-size: 35px;
+  margin: 0 0 40px 0;
+}
+
+.sign__checkbox{
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 25px;
 }

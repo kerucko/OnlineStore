@@ -1,33 +1,107 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>OnlineStore</title>
-        <style>
-            body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                background-color: lightblue;
-            }
-            .test {
-                margin: 10px;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            <form>
-                <label for="email" class="test">Email</label>
-                <input type="email" name="email" id="email" class="test">
-                <br>
-                <label for="password" class="test">Password</label>
-                <input type="password" name="password" id="password" class="test">
-                <br>
-                <input type="button" value="Войти" class="test" onclick="signin()">
-            </form>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="images/иконка.svg" />
+    <title>Вход</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div class="header__container">
+          <div class="header__logo">
+            <a href="seller.html">
+              <img src="images/OnlineStore.svg" alt="Logo" />
+            </a>
+          </div>
         </div>
-        <script src="js/signin.js" defer></script>
-    </body>
+      </div>
+
+      <div class="body__container">
+        <div class="seller__products-top--menu">
+            <div class="signin__products-main--txt">Вход</div>
+        </div>
+        <div class="sign__place">
+          <form class="profile__form">
+            <label for="email">Email</label>
+            <div class="profile__inner-input--knopka">
+              <input
+                class="profile__inner-input--name"
+                type="email"
+                name="email"
+                id="email"
+              />
+            </div>
+            <label for="password">Password</label>
+            <div class="profile__inner-input--knopka">
+              <input
+                class="profile__inner-input--name"
+                type="password"
+                name="password"
+                id="password"
+              />
+            </div>
+            <div class="sign__checkbox">
+            <input id="html" type="checkbox">
+            <label for="html">Войти как продавец</label>
+        </div>
+            <button>
+              <input
+                type="button"
+                value="Войти"
+                class="sign__btn"
+                onclick="signin()"
+              />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer__container">
+          <div class="footer__section-txt">
+            <ul>
+              <li class="footer__bold-txt">О магазине</li>
+              <a href="#"><li>Акции и скидки</li></a>
+              <a href="#"><li>Юридическим лицам</li></a>
+              <a href="#"><li>Как заказать</li></a>
+              <a href="#"><li>Обмен и возврат</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Клиентам</li>
+              <a href="#"><li>Личный кабинет</li></a>
+              <a href="#"><li>Мои заказы</li></a>
+              <a href="#"><li>Вопросы и ответы</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Информация</li>
+              <a href="#"><li>Политика конфиденциальности и оферта</li></a>
+              <a href="#"><li>Пользовательское соглашение</li></a>
+            </ul>
+            <ul>
+              <li class="footer__bold-txt">Мы в соцсетях</li>
+              <a href=""><li>ВКонтакте</li></a>
+              <a href=""><li>YouTube</li></a>
+              <a href=""><li>Телеграм</li></a>
+            </ul>
+          </div>
+          <img class="footer__line-decor" src="images/Line.png" alt="" />
+          <div class="footer__logo-cards">
+            <div class="footer__brand-logo">OnlineStore</div>
+          </div>
+          <div class="footer__c">
+            © OnlineStore - маркетплейс товаров различных категорий. Все права
+            защищены.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/signin.js" defer></script>
+  </body>
 </html>
