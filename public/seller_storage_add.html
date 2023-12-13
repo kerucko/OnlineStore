@@ -23,7 +23,7 @@
       </div>
 
       <div class="body__container">
-          <form class="storage__form">
+          <form class="storage__form" id=form>
             <label class="storage__inner-input" for="name"
               >Введите адрес склада</label
             >
@@ -31,10 +31,11 @@
               class="storage__inner-input--name"
               type="text"
               name=""
-              id="price"
+              id="text"
             />
             <!-- <div class="seller__save__btn"> -->
-                <input class ="storage__save__btn" type="submit"/>
+                <input class ="storage__save__btn" type="button" onclick="sendData()" value="Отправить"/>
+
           </form>
           <a class="storage__btn" href="seller_storage.html"> К списку складов </a>
         <!-- </div> -->
@@ -81,6 +82,6 @@
       </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="js/add_store.js" defer></script>
   </body>
 </html>

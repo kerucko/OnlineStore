@@ -38,8 +38,8 @@ type Store struct {
 }
 
 type Delivery struct {
-	Data     time.Time      `json:"data"`
-	Products []StoreProduct `json:"products"`
+	StoreProduct
+	Data time.Time `json:"data"`
 }
 
 type InsertProduct struct {
