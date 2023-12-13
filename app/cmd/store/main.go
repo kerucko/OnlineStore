@@ -27,6 +27,7 @@ func main() {
 	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 	router.Get("/profile", handlers.GetCustomerProfileHandler(db, cfg.Timeout))
 	router.Get("/signin", handlers.SignInHandler(db, cfg.Timeout))
+	router.Get("/cart", handlers.GetCartHandler(db, cfg.Timeout))
 
 	router.Get("/seller/product", handlers.GetSellersProductsHandler(db, cfg.Timeout))
 	router.Get("/seller/store", handlers.GetSellerStoresHandler(db, cfg.Timeout))
