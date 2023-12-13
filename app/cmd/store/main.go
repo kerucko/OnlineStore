@@ -27,6 +27,11 @@ func main() {
 	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 	router.Get("/profile", handlers.GetCustomerProfileHandler(db, cfg.Timeout))
 	router.Get("/signin", handlers.SignInHandler(db, cfg.Timeout))
-	router.Get("/seller", handlers.GetSellersProductsHandler(db, cfg.Timeout))
+
+	router.Get("/seller/product", handlers.GetSellersProductsHandler(db, cfg.Timeout))
+	router.Get("/seller/store", handlers.GetSellerStoresHandler(db, cfg.Timeout))
+	router.Get("/seller/delivery", handlers.GetSellerDeliveriesHandler(db, cfg.Timeout))
+
+	router.Post("/seller/product", handlers.NewProductHandler(db, cfg.Timeout))
 	log.Fatal(http.ListenAndServe(":"+cfg.Server.Port, router))
 }
