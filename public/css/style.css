@@ -1134,7 +1134,7 @@ label {
 
 .sign__btn:hover {
   transition: 0.4s;
-  box-shadow: 0 0 10px #5c6b99;
+  /* box-shadow: 0 0 10px #5c6b99; */
 }
 
 .signin__products-main--txt{

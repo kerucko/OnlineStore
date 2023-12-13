@@ -1,6 +1,5 @@
 function sendData() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sellerID = urlParams.get('id');
+    const sellerID = localStorage.getItem("id");
     var textValue = document.getElementById('text').value;
     console.log(sellerID)
     var data = {id:0, address: textValue };

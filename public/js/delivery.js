@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sellerID = urlParams.get('id');
+    const sellerID = localStorage.getItem("id");
     fetch("http://127.0.0.1:8080/seller/delivery?id=" + sellerID) // отправка GET-запроса на сервер
         .then(response => response.json()) // получение текстового ответа
         .then(data => {

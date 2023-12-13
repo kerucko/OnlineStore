@@ -3,14 +3,19 @@ function signin() {
     const password = document.getElementById("password").value;
     console.log(email)
     console.log(password)
-    console.log("signin")
+
+    const isSeller = document.getElementById("checkbox").checked;
 
     fetch("http://127.0.0.1:8080/signin?email=" + email + "&password=" + password)
     .then(response => response.json())
     .then(data => {
         console.log(data)
         localStorage.setItem("id", data.id)
-        location.href = "index.html"
+        if (isSeller) {
+            location.href = "seller.html"
+        } else {
+            location.href = "index.html"
+        }
     })
     .catch(error => {
         console.error("Error:", error);
