@@ -310,7 +310,7 @@ func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string)
 
 func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) {
 	request := `
-		SELECT p.id, p.title, p.price, p.photo_path, se.title
+		SELECT p.id, p.title, p.price, p.photo_path, se.title, op.amount
 		FROM product p
 		JOIN store_product sp ON p.id = sp.product_id
 		JOIN store s ON sp.store_id = s.id
@@ -319,6 +319,7 @@ func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) 
 		JOIN orders o ON op.order_id = o.id AND o.id = $1
 	`
 	var order entities.Order
+	order.ID = id
 	rows, err := s.conn.Query(ctx, request, id)
 	if err != nil {
 		return entities.Order{}, err
@@ -326,8 +327,8 @@ func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) 
 	defer rows.Close()
 
 	for rows.Next() {
-		var product entities.Product
-		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath, &product.Shop)
+		var product entities.OrderProduct
+		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath, &product.Shop, &product.Amount)
 		if err != nil {
 			return entities.Order{}, err
 		}

@@ -547,11 +547,12 @@ label {
 .basket__order-card {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #fff;
   width: 1170px;
   border-radius: 25px;
   box-shadow: 0 0 7px 0 #acacac;
+  margin: 0 0 20px 0;
 }
 .basket__order-card--img {
   padding: 20px;
