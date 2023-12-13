@@ -38,7 +38,6 @@ type Store struct {
 }
 
 type Delivery struct {
-	StoreID  int            `json:"store_id"`
 	Data     time.Time      `json:"data"`
 	Products []StoreProduct `json:"products"`
 }
