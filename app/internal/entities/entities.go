@@ -1,5 +1,7 @@
 package entities
 
+import "time"
+
 type Customer struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
@@ -24,8 +26,25 @@ type Category struct {
 }
 
 type StoreProduct struct {
-	Title        string
-	Amount       int
-	StoreAddress string
-	PhotoPath    string
+	Title        string `json:"title"`
+	Amount       int    `json:"amount"`
+	StoreAddress string `json:"store_address"`
+	PhotoPath    string `json:"photo_path"`
+}
+
+type Store struct {
+	ID      int    `json:"id"`
+	Address string `json:"address"`
+}
+
+type Delivery struct {
+	Data     time.Time      `json:"data"`
+	Products []StoreProduct `json:"products"`
+}
+
+type InsertProduct struct {
+	Product
+	StoreAddress  string `json:"store_address"`
+	CategoryTitle string `json:"category"`
+	Amount        int    `json:"amount"`
 }

@@ -7,19 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
             // JSON {id, name, phone, email, address}
             const name = document.getElementById("name");
             name.value = data.name
-            // name.setAttribute("value", data.name);
 
             const phone = document.getElementById("tel");
             phone.value = data.phone
-            // phone.setAttribute("value", data.phone);
 
             const email = document.getElementById("email");
             email.value = data.email
-            // email.setAttribute("value", data.email);
 
             const address = document.getElementById("address");
             address.value = data.address
-            // address.setAttribute("value", data.address);
         })
         .catch(error => {
             console.error("Error:", error);

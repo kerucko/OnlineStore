@@ -8,5 +8,3 @@ postgres:
   user: "postgres"
   password: "postgres"
   timeout: 4s
-
-mongo:
