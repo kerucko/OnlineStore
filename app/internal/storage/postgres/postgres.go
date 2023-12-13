@@ -162,8 +162,6 @@ func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]enti
 		where seller.id = $1
 		order by s.id, d.date
 	`
-	prevData := time.Time{}
-	prevStoreAddress := ""
 	var deliveries []entities.Delivery
 	rows, err := s.conn.Query(ctx, request, sellerID)
 	if err != nil {
@@ -172,17 +170,12 @@ func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]enti
 	defer rows.Close()
 	for rows.Next() {
 		var delivery entities.Delivery
-		var curProduct entities.StoreProduct
-		err = rows.Scan(&curProduct.Title, &curProduct.PhotoPath, &delivery.Data, &curProduct.Amount, &curProduct.StoreAddress)
+		err = rows.Scan(&delivery.Title, &delivery.PhotoPath, &delivery.Data, &delivery.Amount, &delivery.StoreAddress)
 		if err != nil {
 			return nil, err
 		}
-		if prevData != delivery.Data || prevStoreAddress != curProduct.StoreAddress {
-			deliveries = append(deliveries, delivery)
-		}
-		deliveries[len(deliveries)-1].Products = append(deliveries[len(deliveries)-1].Products, curProduct)
-		prevData = delivery.Data
-		prevStoreAddress = curProduct.StoreAddress
+
+		deliveries = append(deliveries, delivery)
 	}
 	return deliveries, nil
 }
