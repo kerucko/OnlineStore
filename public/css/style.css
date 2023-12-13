@@ -1137,14 +1137,89 @@ label {
   box-shadow: 0 0 10px #5c6b99;
 }
 
-.signin__products-main--txt{
+.signin__products-main--txt {
   font-weight: 600;
   font-size: 35px;
   margin: 0 0 40px 0;
 }
 
-.sign__checkbox{
+.sign__checkbox {
   display: flex;
   align-items: center;
   margin: 0 0 0 25px;
+}
+
+.cart__quantity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  margin: 0 0 20px 70px;
+}
+
+.cart__inner-input {
+  background-color: #fff;
+  color: #434e74;
+  box-shadow: 0 0 5px #5c6b99;
+  height: 50px;
+  width: 130px;
+  border-radius: 25px;
+  margin: 20px 20px 20px 40px;
+  padding: 0 20px 0 20px;
+  font-size: 16px;
+  align-items: center;
+}
+
+.raz {
+  all: unset;
+  width: 3em;
+  text-align: center;
+}
+
+.raz::-webkit-inner-spin-button {
+  display: none;
+}
+
+.cart_btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 40px;
+}
+
+.btn_q {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.btn_q:hover {
+  transition: 0.2s;
+  box-shadow: 0 0 10px #9ba8d0;
+}
+
+.basket__card-shop--quantity {
+  margin: 80px 0 0 30px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.all__orders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  width: 1050px;
+  height: 70px;
+  border-radius: 25px;
+  box-shadow: 0 0 7px 0 #acacac;
+  margin: 50px 0 50px 0;
+}
+
+.order__name {
+  margin: 0 0 0 20px;
+}
+
+.order__status{
+  margin: 0 20px 0 20px;
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/fonts.css" />
@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/иконка.svg" />
     <title>Корзина</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="wrapper">
-        <div class="header">
+      <div class="header">
         <div class="header__container">
           <div class="header__logo">
             <a href="index.html">
@@ -62,76 +62,85 @@
             </li>
           </ul>
         </div>
-        </div>
-        <div class="body__container">
+      </div>
+      <div class="body__container">
         <div class="basket">
-            <div class="basket__top-menu">
+          <div class="basket__top-menu">
             <div class="basket__main-txt">Корзина</div>
-            <button class="basket__top-menu--btn"> Выбрать все </button>  
+            <button class="basket__top-menu--btn">Выбрать все</button>
           </div>
-        <div class="basket__cards" id="cards">
-        <div class="basket__btns">
-          <div class="basket__cards">
-            <a href="#">
-              <div class="basket__order-card">
-                <img
-                  class="basket__order-card--img"
-                  src="images/рубашка.png"
-                  alt="card1"
-                />
-                <div class="basket__img-name-price">
-                <div class="basket__card-name">Рубашка женская oversize</div>
-                <div class="basket__card-price">
-                  999 ₽
-                </div>
-                <div class="basket__card-shop">
-                    <img class="basket__card-shop--img" src="images/магазин.svg" alt="">
-                    <div class="basket__card-shop--txt">Название магазина</div>
-                </div>
-            </div>
-              </div>
-            </div>
-            </a>
-            <input type="checkbox" id="checkbox" />
-            <label for="checkbox"></label>
-        </div>
-        <div class="basket__btns">
-            <a href="#">
+          <div class="basket__cards" id="cards">
+            <div class="basket__btns">
+              <div class="basket__cards">
                 <div class="basket__order-card">
-                <img
-                    class="basket__order-card--img"
-                    src="images/рубашка.png"
-                    alt="card1"
-                />
-                <div class="basket__img-name-price">
-                <div class="basket__card-name">Рубашка женская oversize</div>
-                <div class="basket__card-price">
-                    999 ₽
+                  <a href="product.html">
+                    <img
+                      class="basket__order-card--img"
+                      src="images/рубашка.png"
+                      alt="card1"
+                    />
+                  </a>
+                  <div class="basket__img-name-price">
+                    <div class="basket__card-name">
+                      Рубашка женская oversize
+                    </div>
+                    <div class="basket__card-price">999 ₽</div>
+                    <div class="basket__card-shop">
+                      <img
+                        class="basket__card-shop--img"
+                        src="images/магазин.svg"
+                        alt=""
+                      />
+                      <div class="basket__card-shop--txt">
+                        Название магазина
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cart__quantity">
+                    <label for="quantity">Количество:</label>
+                    <div class="cart_btns">
+                      <button
+                        class="btn_q"
+                        type="button"
+                        onclick="this.nextElementSibling.stepDown()"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value="1"
+                        readonly
+                        class="raz"
+                      />
+                      <button
+                      class="btn_q"
+                        type="button"
+                        onclick="this.previousElementSibling.stepUp()"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="basket__card-shop">
-                    <img class="basket__card-shop--img" src="images/магазин.svg" alt="">
-                    <div class="basket__card-shop--txt">Название магазина</div>
-                </div>
+              </div>
+              <input type="checkbox" id="checkbox" />
+              <label for="checkbox"></label>
             </div>
-                </div>
-            </a>
-            <input type="checkbox" id="checkbox"/>
-            <label for="checkbox"></label>
-        </div>
-        </div>
-        <div class="basket__bottom-menu">
+          </div>
+          <div class="basket__bottom-menu">
             <div class="basket__bottom-result">
-                <div class="basket__bottom-result--txt">Итого:</div>
-                <div class="basket__bottom-result--sum">1998 ₽</div>
+              <div class="basket__bottom-result--txt">Итого:</div>
+              <div class="basket__bottom-result--sum">1998 ₽</div>
             </div>
-            <a class="basket__bottom-ordering" href="#">
-                <div class="basket__bottom-ordering--txt">Заказать</div>
+            <a class="basket__bottom-ordering" href="all_orders.html">
+              <div class="basket__bottom-ordering--txt">Заказать</div>
             </a>
+          </div>
         </div>
-
-        </div>
-        </div>
-    <div class="footer">
+      </div>
+      <div class="footer">
         <div class="footer__container">
           <div class="footer__section-txt">
             <ul>
@@ -168,9 +177,9 @@
             защищены.
           </div>
         </div>
-    </div>
+      </div>
     </div>
 
     <script src="js/cart.js" defer></script>
-</body>
+  </body>
 </html>
