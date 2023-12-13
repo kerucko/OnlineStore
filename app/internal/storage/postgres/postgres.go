@@ -246,3 +246,34 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 	}
 	return nil
 }
+
+
+func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Product, error) {
+	request := `
+		SELECT p. id, p.title, p.price, p.photo_path, se.title
+		FROM product p
+		JOIN cart_product cp ON p.id = cp.product_id
+		JOIN cart c ON cp.cart_id = c.id AND c.customer_id = $1
+		JOIN store_product sp ON p.id = sp.product_id
+		JOIN store s ON sp.store_id = s.id
+		JOIN seller se ON s.seller_id = se.id
+	`
+
+	var cart []entities.Product
+	rows, err := s.conn.Query(ctx, request, customerID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var product entities.Product
+		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath, &product.Shop)
+		if err != nil {
+			return nil, err
+		}
+		cart = append(cart, product)
+	}
+
+	return cart, nil
+}
