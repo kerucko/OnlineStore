@@ -278,7 +278,7 @@ func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Produ
 
 func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string) error {
 	insertSQL := "insert into store(address, seller_id) values($1, $2)"
-	_, err := s.conn.Exec(ctx, insertSQL, sellerID, address)
+	_, err := s.conn.Exec(ctx, insertSQL, address, sellerID)
 	if err != nil {
 		return err
 	}
