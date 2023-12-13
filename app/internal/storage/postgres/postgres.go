@@ -277,3 +277,58 @@ func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string)
 	}
 	return nil
 }
+
+func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) {
+	request := `
+		SELECT p.id, p.title, p.price, p.photo_path, se.title
+		FROM product p
+		JOIN store_product sp ON p.id = sp.product_id
+		JOIN store s ON sp.store_id = s.id
+		JOIN seller se ON s.seller_id = se.id
+		JOIN order_product op ON p.id = op.product_id
+		JOIN orders o ON op.order_id = o.id AND o.id = $1
+	`
+	var order entities.Order
+	rows, err := s.conn.Query(ctx, request, id)
+	if err != nil {
+		return entities.Order{}, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var product entities.Product
+		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath, &product.Shop)
+		if err != nil {
+			return entities.Order{}, err
+		}
+		order.Products = append(order.Products, product)
+	}
+
+	return order, nil
+}
+
+func (s *Storage) GetAllOrders(ctx context.Context, customerID int) ([]entities.Order, error) {
+	request := `
+		SELECT o.id, o.status
+		FROM orders o
+		JOIN customer c ON o.customer_id = c.id AND c.id = $1
+	`
+
+	var orders []entities.Order
+	rows, err := s.conn.Query(ctx, request, customerID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var order entities.Order
+		err = rows.Scan(&order.ID, &order.Status)
+		if err != nil {
+			return nil, err
+		}
+		orders = append(orders, order)
+	}
+
+	return orders, nil
+}

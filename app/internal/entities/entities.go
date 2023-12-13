@@ -48,3 +48,10 @@ type InsertProduct struct {
 	CategoryTitle string `json:"category"`
 	Amount        int    `json:"amount"`
 }
+
+
+type Order struct {
+	ID        int       `json:"id"`
+	Status    string    `json:"status"`
+	Products  []Product `json:"products"`
+}
