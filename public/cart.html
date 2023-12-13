@@ -67,7 +67,6 @@
         <div class="basket">
           <div class="basket__top-menu">
             <div class="basket__main-txt">Корзина</div>
-            <button class="basket__top-menu--btn">Выбрать все</button>
           </div>
           <div class="basket__cards" id="cards">
             <div class="basket__btns">
@@ -96,37 +95,39 @@
                       </div>
                     </div>
                   </div>
-                  <div class="cart__quantity">
-                    <label for="quantity">Количество:</label>
-                    <div class="cart_btns">
-                      <button
-                        class="btn_q"
-                        type="button"
-                        onclick="this.nextElementSibling.stepDown()"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="number"
-                        min="1"
-                        max="100"
-                        value="1"
-                        readonly
-                        class="raz"
-                      />
-                      <button
-                      class="btn_q"
-                        type="button"
-                        onclick="this.previousElementSibling.stepUp()"
-                      >
-                        +
-                      </button>
+                  <div class="cart__del-quant">
+                    <button class="cart__delete">Удалить</button>
+
+                    <div class="cart__quantity">
+                      <label for="quantity">Количество:</label>
+                      <div class="cart_btns">
+                        <button
+                          class="btn_q"
+                          type="button"
+                          onclick="this.nextElementSibling.stepDown()"
+                        >
+                          -
+                        </button>
+                        <input
+                          type="number"
+                          min="1"
+                          max="100"
+                          value="1"
+                          readonly
+                          class="raz"
+                        />
+                        <button
+                          class="btn_q"
+                          type="button"
+                          onclick="this.previousElementSibling.stepUp()"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <input type="checkbox" id="checkbox" />
-              <label for="checkbox"></label>
             </div>
           </div>
           <div class="basket__bottom-menu">
