@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"OnlineStore/internal/entities"
 	"OnlineStore/internal/storage"
 	"OnlineStore/internal/storage/postgres"
 	"context"
@@ -52,8 +53,17 @@ func GetCategoryHandler(db *postgres.Storage, timeout time.Duration) http.Handle
 		log.Printf("%s %s", op, categoryName)
 
 		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		var (
+			category entities.Category
+			err      error
+		)
+
 		defer cancel()
-		category, err := db.GetAllProductFromCategory(categoryName, ctx)
+		if categoryName == "hits" {
+			category, err = db.GetBestSellers(ctx)
+		} else {
+			category, err = db.GetAllProductFromCategory(categoryName, ctx)
+		}
 		switch {
 		case errors.Is(err, storage.ErrNotExist):
 			log.Printf("%s %v", op, err)
@@ -151,7 +161,6 @@ func SignInHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc
 		log.Printf("%s sending reply %v", op, customer)
 	}
 }
-
 
 func GetCartHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
 	op := "GetBasketHandler:"

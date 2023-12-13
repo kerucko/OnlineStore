@@ -86,6 +86,36 @@ func (s *Storage) GetAllProductFromCategory(categoryName string, ctx context.Con
 	return category, nil
 }
 
+func (s *Storage) GetBestSellers(ctx context.Context) (entities.Category, error) {
+	request := `
+		SELECT p.id, p.title, p.price, p.photo_path
+		FROM product p
+		JOIN order_product op ON p.id = op.product_id
+		GROUP BY p.id, p.title
+		ORDER BY SUM(op.amount) DESC
+		LIMIT 10;
+	`
+	var category entities.Category
+	category.Name = "Бестселлеры"
+	rows, err := s.conn.Query(ctx, request)
+	if err != nil {
+		return entities.Category{}, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var product entities.Product
+		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath)
+		if err != nil {
+			return entities.Category{}, err
+		}
+		category.Products = append(category.Products, product)
+	}
+	if category.Products == nil {
+		return entities.Category{}, storage.ErrNotExist
+	}
+	return category, nil
+}
+
 func (s *Storage) GetCustomerByEmail(email string, ctx context.Context) (entities.Customer, error) {
 	request := `
 		SELECT id, customer_name, email, phone, address
