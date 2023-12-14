@@ -260,3 +260,62 @@ func GetOrderHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFu
 		log.Printf("%s sending reply %v", op, order)
 	}
 }
+
+func DeleteFromCartHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
+	op := "DeleteFromCartHandler:"
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+
+		customerID, err := strconv.Atoi(r.URL.Query().Get("customer_id"))
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		productID, err := strconv.Atoi(r.URL.Query().Get("product_id"))
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+
+		err = db.DeleteFromCart(ctx, customerID, productID)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		ok := true
+		err = json.NewEncoder(w).Encode(ok)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		log.Printf("%s Success", op)
+	}
+}
+
+func BuyHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
+	op := "BuyHandler:"
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST")
+
+		customerID, err := strconv.Atoi(r.URL.Query().Get("customer_id"))
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+
+		err = db.Buy(ctx, customerID)
+	}
+}
