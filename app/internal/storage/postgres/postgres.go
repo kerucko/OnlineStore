@@ -269,9 +269,9 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 	return nil
 }
 
-func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Product, error) {
+func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.OrderProduct, error) {
 	request := `
-		SELECT p. id, p.title, p.price, p.photo_path, se.title
+		SELECT p. id, p.title, p.price, p.photo_path, se.title, cp.amount
 		FROM product p
 		JOIN cart_product cp ON p.id = cp.product_id
 		JOIN cart c ON cp.cart_id = c.id AND c.customer_id = $1
@@ -280,7 +280,7 @@ func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Produ
 		JOIN seller se ON s.seller_id = se.id
 	`
 
-	var cart []entities.Product
+	var cart []entities.OrderProduct
 	rows, err := s.conn.Query(ctx, request, customerID)
 	if err != nil {
 		return nil, err
@@ -288,8 +288,8 @@ func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Produ
 	defer rows.Close()
 
 	for rows.Next() {
-		var product entities.Product
-		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath, &product.Shop)
+		var product entities.OrderProduct
+		err = rows.Scan(&product.ID, &product.Title, &product.Price, &product.PhotoPath, &product.Shop, &product.Amount)
 		if err != nil {
 			return nil, err
 		}
@@ -386,4 +386,26 @@ func (s *Storage) GetAllOrders(ctx context.Context, customerID int) ([]entities.
 	}
 
 	return orders, nil
+}
+
+func (s *Storage) DeleteFromCart(ctx context.Context, customerID int, productID int) error {
+	deleteSQL := `
+	DELETE FROM cart_product
+	WHERE cart_id = (select id from cart where customer_id = $1) and product_id = $2`
+	_, err := s.conn.Exec(ctx, deleteSQL, customerID, productID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *Storage) Buy(ctx context.Context, customerID int) error {
+	request := `
+		byak byak
+	`
+	_, err := s.conn.Exec(ctx, request, customerID)
+	if err != nil {
+		return err
+	}
+	return nil
 }

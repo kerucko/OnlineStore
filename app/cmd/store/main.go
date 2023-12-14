@@ -31,6 +31,9 @@ func main() {
 	router.Post("/cart", handlers.AddProductToCartHandler(db, cfg.Timeout))
 	router.Get("/all_orders", handlers.GetAllOrdersHandler(db, cfg.Timeout))
 	router.Get("/order", handlers.GetOrderHandler(db, cfg.Timeout))
+	router.Get("/delete_from_cart", handlers.DeleteFromCartHandler(db, cfg.Timeout))
+
+	router.Post("/buy", handlers.BuyHandler(db, cfg.Timeout))
 
 	router.Get("/seller/product", handlers.GetSellersProductsHandler(db, cfg.Timeout))
 	router.Get("/seller/store", handlers.GetSellerStoresHandler(db, cfg.Timeout))
