@@ -11,6 +11,7 @@ function sendData() {
         title: title,
         category: category,
         price: parseInt(price),
+        photo_path: "/photos/Монополия.svg",
         description: desc,
         store_address: address,
         amount: parseInt(amount)

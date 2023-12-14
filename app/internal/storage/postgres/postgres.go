@@ -66,7 +66,14 @@ func (s *Storage) GetProductByID(id int, ctx context.Context) (entities.Product,
 func (s *Storage) GetAllProductFromCategory(categoryName string, ctx context.Context) (entities.Category, error) {
 	var category entities.Category
 	category.Name = categoryName
-	request := "select p.id, p.title, p.price, p.photo_path from product p join category c on p.category_id = c.id where c.title = $1"
+	request := `
+		select p.id, p.title, p.price, p.photo_path 
+		from product p 
+		join category c on p.category_id = c.id 
+		join store_product st on p.id = st.product_id
+		join store on st.store_id = store.id
+		where c.title = $1
+	`
 	rows, err := s.conn.Query(ctx, request, categoryName)
 	if err != nil {
 		return entities.Category{}, err
