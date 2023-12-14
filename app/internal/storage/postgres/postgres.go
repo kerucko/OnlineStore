@@ -271,13 +271,14 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 
 func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.OrderProduct, error) {
 	request := `
-		SELECT p. id, p.title, p.price, p.photo_path, se.title, cp.amount
+		SELECT p.id, p.title, p.price, p.photo_path, se.title, SUM(cp.amount)
 		FROM product p
 		JOIN cart_product cp ON p.id = cp.product_id
 		JOIN cart c ON cp.cart_id = c.id AND c.customer_id = $1
 		JOIN store_product sp ON p.id = sp.product_id
 		JOIN store s ON sp.store_id = s.id
 		JOIN seller se ON s.seller_id = se.id
+		GROUP BY p.id, se.title
 	`
 
 	var cart []entities.OrderProduct
@@ -399,13 +400,43 @@ func (s *Storage) DeleteFromCart(ctx context.Context, customerID int, productID 
 	return nil
 }
 
-func (s *Storage) Buy(ctx context.Context, customerID int) error {
-	request := `
-		byak byak
-	`
-	_, err := s.conn.Exec(ctx, request, customerID)
+func (s *Storage) BuyCart(ctx context.Context, customerID int) error {
+	cart, err := s.GetCart(ctx, customerID)
 	if err != nil {
 		return err
 	}
+	insertOrderRequest := `
+		INSERT INTO orders(customer_id, status, date) 
+		VALUES($1, $2, NOW()) 
+		RETURNING id
+	`
+
+	var orderID int
+	err = s.conn.QueryRow(ctx, insertOrderRequest, customerID, "В сборке").Scan(&orderID)
+	if err != nil {
+		return err
+	}
+
+	for _, product := range cart {
+		insertOrderProductRequest := `
+			INSERT INTO order_product(order_id, product_id, amount) 
+			VALUES($1, $2, $3)
+		`
+		_, err = s.conn.Exec(ctx, insertOrderProductRequest, orderID, product.ID, product.Amount)
+		if err != nil {
+			return err
+		}
+	}
+
+	deleteCartRequest := `
+		DELETE FROM cart_product
+		WHERE cart_product.cart_id = $1
+	`
+
+	_, err = s.conn.Exec(ctx, deleteCartRequest, customerID)
+	if err != nil {
+		return err
+	}
+	log.Printf("Order %d created, customerID: %d", orderID, customerID)
 	return nil
 }
