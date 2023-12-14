@@ -227,3 +227,36 @@ func GetAllOrdersHandler(db *postgres.Storage, timeout time.Duration) http.Handl
 		log.Printf("%s sending reply %v", op, orders)
 	}
 }
+
+func GetOrderHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
+	op := "GetOrderHandler:"
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+
+		orderID, err := strconv.Atoi(r.URL.Query().Get("id"))
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+
+		order, err := db.GetOrder(ctx, orderID)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		err = json.NewEncoder(w).Encode(order)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		log.Printf("%s sending reply %v", op, order)
+	}
+}
