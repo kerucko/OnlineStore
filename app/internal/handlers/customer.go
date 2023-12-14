@@ -350,6 +350,12 @@ func BuyHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
 		ctx, cancel := context.WithTimeout(r.Context(), timeout)
 		defer cancel()
 
-		err = db.Buy(ctx, customerID)
+		err = db.BuyCart(ctx, customerID)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		log.Printf("%s Success", op)
 	}
 }

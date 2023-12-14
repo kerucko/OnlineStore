@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             // JSON {[id, title, price, shop, photo_path, amount]}
             const cards = document.getElementById("cards");
+            let sum = 0;
             for (let i = 0; i < data.length; i++) {
+                sum += data[i].price * data[i].amount;
                 cards.innerHTML += `
                 <div class="basket__btns">
               <div class="basket__cards">
@@ -70,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
                 `
             }
+            document.getElementById("sum").innerHTML = sum + " ₽";
         })
         .catch(error => {
             console.error("Error:", error);
@@ -94,19 +97,9 @@ function del(product_id) {
 
 function buy() {
     const id = localStorage.getItem("id");
-    fetch(`http://127.0.0.1:8080/buy?id=${id}`, {
+    fetch(`http://127.0.0.1:8080/buy?customer_id=${id}`, {
         mode: 'no-cors',
         method: 'POST'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Item added to orders:', data);
-        // Refresh the cart or handle the UI update here
     })
     .catch(error => {
         console.error('Error:', error);
