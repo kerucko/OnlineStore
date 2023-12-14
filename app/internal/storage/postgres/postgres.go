@@ -308,6 +308,30 @@ func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string)
 	return nil
 }
 
+func (s *Storage) getCartID(ctx context.Context, customerID int) (int, error) {
+	request := "select cart.id from cart join customer on cart.customer_id = customer.id where customer.id=$1"
+	var id int
+	row := s.conn.QueryRow(ctx, request, customerID)
+	err := row.Scan(&id)
+	if err != nil {
+		return 0, storage.ErrNotExist
+	}
+	return id, nil
+}
+
+func (s *Storage) AddProductToCart(ctx context.Context, productID int, customerID int) error {
+	cartID, err := s.getCartID(ctx, customerID)
+	if err != nil {
+		return err
+	}
+	request := "insert into cart_product(cart_id, product_id, amount) values($1, $2, 1)"
+	_, err = s.conn.Exec(ctx, request, cartID, productID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) {
 	request := `
 		SELECT p.id, p.title, p.price, p.photo_path, se.title, op.amount

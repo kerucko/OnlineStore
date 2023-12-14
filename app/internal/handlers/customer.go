@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"strconv"
@@ -192,6 +193,39 @@ func GetCartHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFun
 			return
 		}
 		log.Printf("%s sending reply %v", op, cart)
+	}
+}
+
+func AddProductToCartHandler(db *postgres.Storage, timeout time.Duration) http.HandlerFunc {
+	op := "AddProductToCartHandler:"
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
+			log.Printf("%s: ReadAll %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		var object entities.InsertCart
+		err = json.Unmarshal(body, &object)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+
+		err = db.AddProductToCart(ctx, object.ProductID, object.CustomerID)
+		if err != nil {
+			log.Printf("%s %v", op, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		log.Printf("%s success", op)
 	}
 }
 
