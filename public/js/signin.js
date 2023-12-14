@@ -14,7 +14,7 @@ function signin() {
         if (isSeller) {
             location.href = "seller.html"
         } else {
-            location.href = "index.html"
+            location.href = "main.html"
         }
     })
     .catch(error => {
