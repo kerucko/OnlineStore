@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/иконка.svg" />
-    <title>OnlineStore</title>
+    <title>Вход</title>
   </head>
 
   <body>
@@ -15,192 +15,51 @@
       <div class="header">
         <div class="header__container">
           <div class="header__logo">
-            <a href="index.html">
-              <img
-                class="header__logo-img"
-                src="images/OnlineStore.svg"
-                alt="Logo"
-              />
-              <!-- <div class="logo__txt">OnlineStore</div> -->
+            <a href="seller.html">
+              <img src="images/OnlineStore.svg" alt="Logo" />
             </a>
           </div>
-          <div class="header__search-box">
-            <input
-              class="header__search-txt"
-              type="text"
-              name=""
-              placeholder="Поиск"
-            />
-            <button class="header__search-btn" type="submit">
-              <img
-                class="header__search-img"
-                src="images/лупа.svg"
-                alt="loop"
-              />
-            </button>
-          </div>
-          <ul class="header__nav">
-            <li class="header__nav-box">
-              <a href="profile.html">
-                <img
-                  class="header__nav-img--profile"
-                  src="images/профиль.svg"
-                  alt="profile"
-                />
-                <div class="header__nav-txt">Профиль</div></a
-              >
-            </li>
-            <li class="header__nav-box">
-              <a href="cart.html">
-                <img
-                  class="header__nav-img--basket"
-                  src="images/корзина.svg"
-                  alt="basket"
-                />
-                <div class="header__nav-txt">Корзина</div></a
-              >
-            </li>
-          </ul>
         </div>
       </div>
+
       <div class="body__container">
-        <a href="category.html?category=hits">
-          <div class="blue__section">
-            <div class="blue__section-txt">
-              <div class="blue__section-txt1">Бестселлеры</div>
-              <div class="blue__section-box">
-                <div class="blue__section-txt2">Перейти к разделу</div>
-                <img
-                  class="blue__section-arrow"
-                  src="images/стрелочка.svg"
-                  alt="arrow"
-                />
-              </div>
+        <div class="seller__products-top--menu">
+            <div class="signin__products-main--txt">Вход</div>
+        </div>
+        <div class="sign__place">
+          <form class="profile__form">
+            <label for="email">Email</label>
+            <div class="profile__inner-input--knopka">
+              <input
+                class="profile__inner-input--name"
+                type="email"
+                name="email"
+                id="email"
+              />
             </div>
-            <img
-              class="blue__section-img"
-              src="images/блок спорт новинки.png"
-              alt=""
-            />
-          </div>
-        </a>
-        <div class="category__section">
-          <div class="category__txt">Категории</div>
-          <div class="category__cards">
-            <a href="category.html?category=Женская одежда">
-              <div class="category__card">
-                <div class="category__card-txt">Женская <br />одежда</div>
-                <img
-                  class="category__card-img"
-                  src="images/женская одежда.png"
-                  alt="Женская одежда"
-                />
-              </div>
-            </a>
-            <a href="category.html?category=Мужская одежда">
-              <div class="category__card">
-                <div class="category__card-txt">Мужская <br />одежда</div>
-                <img
-                  class="category__card-img"
-                  src="images/мужская одежда.png"
-                  alt="Мужская одежда"
-                />
-              </div>
-            </a>
-          </div>
-          <div class="category__cards">
-            <a href="category.html?category=Техника">
-              <div class="category__card">
-                <div class="category__card-txt">Техника</div>
-                <img
-                  class="category__card-img"
-                  src="images/техника.png"
-                  alt="Техника"
-                />
-              </div>
-            </a>
-            <a href="category.html?category=Дом и сад">
-              <div class="category__card">
-                <div class="category__card-txt">Дом и сад</div>
-                <img
-                  class="category__card-img"
-                  src="images/дом и сад.png"
-                  alt="Дом и сад"
-                />
-              </div>
-            </a>
-          </div>
-          <div class="category__cards">
-            <a href="category.html?category=Строительство и ремонт">
-              <div class="category__card">
-                <div class="category__card-txt">
-                  Строительство <br />
-                  и ремонт
-                </div>
-                <img
-                  class="category__card-img"
-                  src="images/строительство и ремонт.png"
-                  alt="Строительство и ремонт"
-                />
-              </div>
-            </a>
-            <a href="category.html?category=Красота">
-              <div class="category__card">
-                <div class="category__card-txt">Красота</div>
-                <img
-                  class="category__card-img"
-                  src="images/красота.png"
-                  alt="Красота"
-                />
-              </div>
-            </a>
-          </div>
-          <div class="category__cards">
-            <a href="category.html?category=Здоровье">
-              <div class="category__card">
-                <div class="category__card-txt">Здоровье</div>
-                <img
-                  class="category__card-img"
-                  src="images/здоровье.png"
-                  alt="Здоровье"
-                />
-              </div>
-            </a>
-            <a href="category.html?category=Спорт">
-              <div class="category__card">
-                <div class="category__card-txt">Спорт</div>
-                <img
-                  class="category__card-img"
-                  src="images/спорт.png"
-                  alt="Спорт"
-                />
-              </div>
-            </a>
-          </div>
-          <div class="category__cards">
-            <a href="category.html?category=Книги">
-              <div class="category__card">
-                <div class="category__card-txt">Книги</div>
-                <img
-                  class="category__card-img"
-                  src="images/книги.png"
-                  alt="Книги"
-                />
-              </div>
-            </a>
-            <a href="category.html?category=Хобби">
-              <div class="category__card">
-                <div class="category__card-txt">Хобби</div>
-                <img
-                  class="category__card-img"
-                  src="images/хобби.png"
-                  alt="Хобби"
-                />
-              </div>
-            </a>
-          </div>
+            <label for="password">Password</label>
+            <div class="profile__inner-input--knopka">
+              <input
+                class="profile__inner-input--name"
+                type="password"
+                name="password"
+                id="password"
+              />
+            </div>
+            <div class="sign__checkbox">
+            <input id="checkbox" type="checkbox">
+            <label for="checkbox">Войти как продавец</label>
+        </div>
+              <input
+                type="button"
+                value="Войти"
+                class="sign__btn"
+                onclick="signin()"
+              />
+          </form>
         </div>
       </div>
+
       <div class="footer">
         <div class="footer__container">
           <div class="footer__section-txt">
@@ -241,6 +100,6 @@
       </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="js/signin.js" defer></script>
   </body>
 </html>
