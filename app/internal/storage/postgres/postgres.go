@@ -344,7 +344,7 @@ func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) 
 	request := `
 		SELECT p.id, p.title, p.price, p.photo_path, se.title, op.amount
 		FROM product p
-		JOIN store_product sp ONf p.id = sp.product_id
+		JOIN store_product sp ON p.id = sp.product_id
 		JOIN store s ON sp.store_id = s.id
 		JOIN seller se ON s.seller_id = se.id
 		JOIN order_product op ON p.id = op.product_id

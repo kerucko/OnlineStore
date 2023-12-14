@@ -638,6 +638,7 @@ label {
 .basket__bottom-ordering--txt {
   font-size: 30px;
   font-weight: 600;
+  background: #889bd3;
   color: #fff;
   margin: 15px;
 }

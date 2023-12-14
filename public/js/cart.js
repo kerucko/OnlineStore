@@ -104,4 +104,5 @@ function buy() {
     .catch(error => {
         console.error('Error:', error);
     });
+    location.reload()
 }
