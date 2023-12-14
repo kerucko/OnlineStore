@@ -52,14 +52,14 @@
                   </div>
           </form>
           <div class="seller__save__btn">
-          <input class ="seller__save" type="submit" value="Сохранить"/>
+          <input class ="seller__save" type="button" value="Сохранить" onclick="sendData()"/>
         </div>
         </div>
           <div class="order__card-sections">
             <div class="order__card-sections--1">
               <!-- IMAGE -->
               <form class="input_img" enctype="multipart/form-data" method="post">
-                <input class="input__txt" type="file" name="f">
+                <input class="input__txt" type="file" name="f" accept=".svg">
               </form> 
             </div>
             <div class="order__card-sections--2">
@@ -85,7 +85,7 @@
                     class="seller__inner-input--name"
                     type="text"
                     name=""
-                    id="price"
+                    id="description"
                   />
                 </form>
               </div>
@@ -99,7 +99,7 @@
                     class="seller__inner-input--adr"
                     type="text"
                     name=""
-                    id="price"
+                    id="address"
                   />
                 </form>
               </div>
@@ -111,7 +111,7 @@
                     class="seller__inner-input--q"
                     type="text"
                     name=""
-                    id="price"
+                    id="amount"
                   />
                 </form>
                 <!-- <div class="seller__card-section--name" id="shop">Количество</div> -->
@@ -163,6 +163,6 @@
       </div>
     </div>
 
-    <script src="product.js" defer></script>
+    <script src="js/add_product.js" defer></script>
   </body>
 </html>

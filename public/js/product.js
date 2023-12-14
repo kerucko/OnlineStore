@@ -29,3 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error:", error);
         });
 });
+
+function sendData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    const sellerID = localStorage.getItem("id");
+    console.log(sellerID)
+    var data = {customer_id:sellerID, product_id:id};
+    var url = 'http://localhost:8080/seller/cart'
+
+    fetch(url, {
+        mode: 'no-cors',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .catch((error) => {
+            console.error('Ошибка:', error);
+        });
+
+}

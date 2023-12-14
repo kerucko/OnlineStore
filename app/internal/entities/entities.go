@@ -49,14 +49,17 @@ type InsertProduct struct {
 	Amount        int    `json:"amount"`
 }
 
+type InsertCart struct {
+	CustomerID int `json:"customer_id"`
+	ProductID  int `json:"product_id"`
+}
 type OrderProduct struct {
 	Product
 	Amount int `json:"amount"`
 }
 
-
 type Order struct {
-	ID        int       `json:"id"`
-	Status    string    `json:"status"`
-	Products  []OrderProduct `json:"products"`
+	ID       int            `json:"id"`
+	Status   string         `json:"status"`
+	Products []OrderProduct `json:"products"`
 }
