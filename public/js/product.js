@@ -32,12 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function sendData() {
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+    var id = parseInt(urlParams.get('id'));
 
-    const sellerID = localStorage.getItem("id");
+    var sellerID = parseInt(localStorage.getItem("id"));
     console.log(sellerID)
     var data = {customer_id:sellerID, product_id:id};
-    var url = 'http://localhost:8080/seller/cart'
+    var url = 'http://localhost:8080/cart'
 
     fetch(url, {
         mode: 'no-cors',
