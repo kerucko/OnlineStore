@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="basket__card-name">
                       ${data[i].title}
                     </div>
-                    <div class="basket__card-price">999 ₽</div>
+                    <div class="basket__card-price">${data[i].price} ₽</div>
                     <div class="basket__card-shop">
                       <img
                         class="basket__card-shop--img"
@@ -78,22 +78,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function del(product_id) {
     const customer_id = localStorage.getItem("id");
-    fetch(`http://127.0.0.1:8080/delete_from_cart?customer_id=${customer_id}&product_id=${product_id}`, {
-        method: 'DELETE'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Item deleted:', data);
-        // Refresh the cart or handle the UI update here
-    })
-    .catch(error => {
-        console.error('Error:', error)
-    });
+    fetch(`http://127.0.0.1:8080/delete_from_cart?customer_id=${customer_id}&product_id=${product_id}`)
+    .then(response => response.json()) // получение текстового ответа
+        .then(data => {
+            if (data == true) {
+                location.reload();
+            } else {
+                console.error("Error:", data);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 }
 
 function buy() {
