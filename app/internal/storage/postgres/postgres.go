@@ -1,35 +1,46 @@
 package postgres
 
 import (
-	"OnlineStore/internal/entities"
-	"OnlineStore/internal/storage"
 	"context"
 	"fmt"
 	"log"
 	"time"
 
 	"github.com/jackc/pgx/v5"
+
+	"OnlineStore/internal/config"
+	"OnlineStore/internal/entities"
+	"OnlineStore/internal/storage"
 )
 
 type Storage struct {
 	conn *pgx.Conn
 }
 
-func New(dbPath string, timeout time.Duration) (*Storage, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()
+func New(ctx context.Context, cfg config.Postgres) (*Storage, error) {
+	dbPath := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
+		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName)
 
-	conn, err := pgx.Connect(ctx, dbPath)
-	if err != nil {
-		return nil, fmt.Errorf("unable to connect to database: %w", err)
-	}
+	deadline := time.After(cfg.Timeout)
+	ticker := time.NewTicker(time.Second)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ticker.C:
+			conn, err := pgx.Connect(ctx, dbPath)
+			if err != nil {
+				continue
+			}
+			if err = conn.Ping(ctx); err != nil {
+				continue
+			}
+			log.Println("Successful database connection")
+			return &Storage{conn: conn}, nil
 
-	err = conn.Ping(ctx)
-	if err != nil {
-		return nil, err
+		case <-deadline:
+			return nil, fmt.Errorf("unable to connect to database")
+		}
 	}
-	log.Println("Successful database connection")
-	return &Storage{conn: conn}, nil
 }
 
 func (s *Storage) GetCustomerByID(id int, ctx context.Context) (entities.Customer, error) {

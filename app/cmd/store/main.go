@@ -4,7 +4,7 @@ import (
 	"OnlineStore/internal/config"
 	"OnlineStore/internal/handlers"
 	"OnlineStore/internal/storage/postgres"
-	"fmt"
+	"context"
 	"log"
 	"net/http"
 
@@ -13,19 +13,19 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
 	cfg := config.MustLoad()
-	dbPath := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
-		cfg.Host, cfg.Postgres.Port, cfg.User, cfg.Password, cfg.DBName)
-	log.Println(dbPath)
-	db, err := postgres.New(dbPath, cfg.Timeout)
+	db, err := postgres.New(ctx, cfg.Postgres)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
 	router.Get("/product", handlers.GetProductHandler(db, cfg.Timeout))
 	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 	router.Get("/profile", handlers.GetCustomerProfileHandler(db, cfg.Timeout))
+
 	router.Get("/signin", handlers.SignInHandler(db, cfg.Timeout))
 	router.Get("/cart", handlers.GetCartHandler(db, cfg.Timeout))
 	router.Post("/cart", handlers.AddProductToCartHandler(db, cfg.Timeout))
