@@ -22,6 +22,10 @@ func main() {
 
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
+
+	fs := http.FileServer(http.Dir("public"))
+	router.Handle("/*", fs)
+
 	router.Get("/product", handlers.GetProductHandler(db, cfg.Timeout))
 	router.Get("/show_all", handlers.GetCategoryHandler(db, cfg.Timeout))
 	router.Get("/profile", handlers.GetCustomerProfileHandler(db, cfg.Timeout))
@@ -41,5 +45,5 @@ func main() {
 
 	router.Post("/seller/product", handlers.NewProductHandler(db, cfg.Timeout))
 	router.Post("/seller/store", handlers.NewSellerStoreHandler(db, cfg.Timeout))
-	log.Fatal(http.ListenAndServe(":"+cfg.Server.Port, router))
+	log.Fatal(http.ListenAndServe("[::]:"+cfg.Server.Port, router))
 }

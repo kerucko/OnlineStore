@@ -2,7 +2,7 @@ version: "3.8"
 services:
   app:
     container_name: back
-    build: app
+    build: .
     command: sh -c "make migrate && ./store"
     ports:
       - "8080:8080"
@@ -18,9 +18,3 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5436:5432"
-  node:
-    container_name: node
-    build: public
-    ports:
-      - "3000:3000"
-    command: http-server -p 3000
