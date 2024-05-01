@@ -138,7 +138,7 @@ func (s *Storage) GetCustomerByEmail(email string, ctx context.Context) (entitie
 	request := `
 		SELECT id, customer_name, email, phone, address
 		FROM customer
-		WHERE email = $1
+		WHERE email = $1;
 	`
 	var customer entities.Customer
 	row := s.conn.QueryRow(ctx, request, email)
@@ -157,7 +157,7 @@ func (s *Storage) GetAllSellersProducts(sellerID int, ctx context.Context) ([]en
 		join store s on sp.store_id = s.id
 		join seller on s.seller_id = seller.id
 		where seller.id = $1
-		order by p.title
+		order by p.title;
 	`
 	var products []entities.StoreProduct
 	rows, err := s.conn.Query(ctx, request, sellerID)
@@ -181,7 +181,7 @@ func (s *Storage) GetSellerStores(sellerID int, ctx context.Context) ([]entities
 		select store.id, store.address
 		from store
 		join seller on store.seller_id = seller.id
-		where seller.id = $1
+		where seller.id = $1;
 	`
 	var stores []entities.Store
 	rows, err := s.conn.Query(ctx, request, sellerID)
@@ -208,7 +208,7 @@ func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]enti
 		join store s on d.store_id = s.id
 		join seller on s.seller_id = seller.id
 		where seller.id = $1
-		order by s.id, d.date
+		order by s.id, d.date;
 	`
 	var deliveries []entities.Delivery
 	rows, err := s.conn.Query(ctx, request, sellerID)
@@ -229,7 +229,7 @@ func (s *Storage) GetSellerDeliveries(sellerID int, ctx context.Context) ([]enti
 }
 
 func (s *Storage) getCategoryID(ctx context.Context, category string) (int, error) {
-	getCategorySQL := "select id from category where title = $1"
+	getCategorySQL := "select id from category where title = $1;"
 	var id int
 	row := s.conn.QueryRow(ctx, getCategorySQL, category)
 	err := row.Scan(&id)
@@ -263,7 +263,7 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 	log.Println(categoryID)
 	insertProductSQL := `
 		insert into product(title, description, price, photo_path, category_id) 
-		values ($1, $2, $3, $4, $5) RETURNING id
+		values ($1, $2, $3, $4, $5) RETURNING id;
 	`
 	var productID int
 	err = s.conn.QueryRow(ctx, insertProductSQL, object.Title, object.Description, object.Price, object.PhotoPath, categoryID).Scan(&productID)
@@ -277,7 +277,7 @@ func (s *Storage) AddNewProduct(ctx context.Context, object entities.InsertProdu
 	log.Println(storeID)
 	insertStoreProductSQL := `
 		insert into store_product(store_id, product_id, amount)
-		values($1, $2, $3)
+		values($1, $2, $3);
 	`
 
 	_, err = s.conn.Exec(ctx, insertStoreProductSQL, storeID, productID, object.Amount)
@@ -296,7 +296,7 @@ func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Order
 		JOIN store_product sp ON p.id = sp.product_id
 		JOIN store s ON sp.store_id = s.id
 		JOIN seller se ON s.seller_id = se.id
-		GROUP BY p.id, se.title
+		GROUP BY p.id, se.title;
 	`
 
 	var cart []entities.OrderProduct
@@ -319,7 +319,7 @@ func (s *Storage) GetCart(ctx context.Context, customerID int) ([]entities.Order
 }
 
 func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string) error {
-	insertSQL := "insert into store(address, seller_id) values($1, $2)"
+	insertSQL := "insert into store(address, seller_id) values($1, $2);"
 	_, err := s.conn.Exec(ctx, insertSQL, address, sellerID)
 	if err != nil {
 		return err
@@ -328,7 +328,7 @@ func (s *Storage) AddNewStore(ctx context.Context, sellerID int, address string)
 }
 
 func (s *Storage) getCartID(ctx context.Context, customerID int) (int, error) {
-	request := "select cart.id from cart join customer on cart.customer_id = customer.id where customer.id=$1"
+	request := "select cart.id from cart join customer on cart.customer_id = customer.id where customer.id=$1;"
 	var id int
 	row := s.conn.QueryRow(ctx, request, customerID)
 	err := row.Scan(&id)
@@ -343,7 +343,7 @@ func (s *Storage) AddProductToCart(ctx context.Context, productID int, customerI
 	if err != nil {
 		return err
 	}
-	request := "insert into cart_product(cart_id, product_id, amount) values($1, $2, 1)"
+	request := "insert into cart_product(cart_id, product_id, amount) values($1, $2, 1);"
 	_, err = s.conn.Exec(ctx, request, cartID, productID)
 	if err != nil {
 		return err
@@ -359,7 +359,7 @@ func (s *Storage) GetOrder(ctx context.Context, id int) (entities.Order, error) 
 		JOIN store s ON sp.store_id = s.id
 		JOIN seller se ON s.seller_id = se.id
 		JOIN order_product op ON p.id = op.product_id
-		JOIN orders o ON op.order_id = o.id AND o.id = $1
+		JOIN orders o ON op.order_id = o.id AND o.id = $1;
 	`
 	var order entities.Order
 	order.ID = id
@@ -410,7 +410,7 @@ func (s *Storage) GetAllOrders(ctx context.Context, customerID int) ([]entities.
 func (s *Storage) DeleteFromCart(ctx context.Context, customerID int, productID int) error {
 	deleteSQL := `
 	DELETE FROM cart_product
-	WHERE cart_id = (select id from cart where customer_id = $1) and product_id = $2`
+	WHERE cart_id = (select id from cart where customer_id = $1) and product_id = $2;`
 	_, err := s.conn.Exec(ctx, deleteSQL, customerID, productID)
 	if err != nil {
 		return err
@@ -426,7 +426,7 @@ func (s *Storage) BuyCart(ctx context.Context, customerID int) error {
 	insertOrderRequest := `
 		INSERT INTO orders(customer_id, status, date) 
 		VALUES($1, $2, NOW()) 
-		RETURNING id
+		RETURNING id;
 	`
 
 	var orderID int
@@ -438,7 +438,7 @@ func (s *Storage) BuyCart(ctx context.Context, customerID int) error {
 	for _, product := range cart {
 		insertOrderProductRequest := `
 			INSERT INTO order_product(order_id, product_id, amount) 
-			VALUES($1, $2, $3)
+			VALUES($1, $2, $3);
 		`
 		_, err = s.conn.Exec(ctx, insertOrderProductRequest, orderID, product.ID, product.Amount)
 		if err != nil {
@@ -448,7 +448,7 @@ func (s *Storage) BuyCart(ctx context.Context, customerID int) error {
 
 	deleteCartRequest := `
 		DELETE FROM cart_product
-		WHERE cart_product.cart_id = $1
+		WHERE cart_product.cart_id = $1;
 	`
 
 	_, err = s.conn.Exec(ctx, deleteCartRequest, customerID)
